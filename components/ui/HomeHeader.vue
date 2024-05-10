@@ -22,7 +22,7 @@
               </v-icon>
               Eventos y Sitios
             </v-btn>
-            <v-btn text href="#" color="black">
+            <v-btn text color="black" @click="navigateToBenefits">
               Beneficios
             </v-btn>
             <v-btn text href="#" color="black">
@@ -54,6 +54,9 @@ export default {
     },
     navigateToLogin () {
       this.$router.push('/login')
+    },
+    navigateToBenefits () {
+      this.$router.push('beneficios')
     }
   }
 }

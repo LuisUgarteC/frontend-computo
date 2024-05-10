@@ -33,6 +33,7 @@
           </v-col>
         </v-row>
       </v-container>
+      <benefits-banner />
     </v-main>
   </v-app>
 </template>

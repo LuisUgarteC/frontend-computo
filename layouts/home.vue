@@ -30,6 +30,7 @@
                   <v-form>
                     <v-select
                       v-model="selectedOrigin"
+                      hide-details
                       class="my-4"
                       :items="origins"
                       label="Selecciona el origen"
@@ -39,6 +40,7 @@
                     />
                     <v-select
                       :items="['Selecciona primero el origen']"
+                      hide-details
                       label="Destino"
                       filled
                       dense
@@ -60,6 +62,7 @@
                     <v-text-field
                       type="number"
                       label="Usuarios"
+                      hide-details
                       value="1"
                       class="my-1"
                       filled
@@ -88,6 +91,7 @@
           </v-col>
         </v-row>
       </v-container>
+      <benefits-banner />
     </v-main>
   </v-app>
 </template>
