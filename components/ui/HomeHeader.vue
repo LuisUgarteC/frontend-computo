@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="white">
+  <v-app-bar app color="white">
     <v-container class="py-6">
       <v-row align="center" justify="space-between">
         <v-col cols="auto">

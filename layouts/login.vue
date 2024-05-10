@@ -3,7 +3,7 @@
     <v-main>
       <Nuxt />
 
-      <v-container>
+      <v-container style="padding-top: 50px">
         <v-row class="pa-10" justify="space-between">
           <v-col cols="12" md="6">
             <h2 class="text-h4 font-weight-bold mb-4">
@@ -64,6 +64,7 @@
           </v-col>
         </v-row>
       </v-container>
+      <info-extra />
     </v-main>
   </v-app>
 </template>

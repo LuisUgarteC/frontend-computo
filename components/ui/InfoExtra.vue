@@ -2,7 +2,12 @@
   <v-container class="py-12">
     <v-row>
       <v-col v-for="item in items" :key="item.title" cols="12" md="4" class="text-center">
-        <v-img :src="item.image" :alt="item.title" class="mx-auto" height="64" />
+        <v-icon
+          size="64"
+          style="margin-top: 20px;"
+        >
+          {{ item.icon }}
+        </v-icon> <!-- Usamos v-icon aquí -->
         <h3 class="text-h5 font-semibold my-2">
           {{ item.title }}
         </h3>
@@ -23,22 +28,22 @@ export default {
     return {
       items: [
         {
-          image: 'https://placehold.co/64x64',
+          icon: 'mdi-car-info', // Usamos el nombre del ícono aquí
           title: 'Quiénes Somos',
           description: 'Descubre más de nuestra visión, lo que nos mueve y como queremos cambiar la forma en que tú viajas por el país',
-          link: '#' // Puedes cambiar estos enlaces por los reales
+          link: '#'
         },
         {
-          image: 'https://placehold.co/64x64',
+          icon: 'mdi-sprout', // Repetimos para cada ítem
           title: 'Medio Ambiente',
           description: 'Por cada CONNEXIÓN se evita, al menos, el viaje de 5 autos privados, ahorrando así emisiones equivalentes a más de 500 mil kilómetros anuales.',
-          link: undefined // No hay enlace para esta sección en el HTML original
+          link: undefined
         },
         {
-          image: 'https://placehold.co/64x64',
+          icon: 'mdi-shield-car',
           title: 'Seguridad',
           description: 'Contamos con conductores capacitados disminuyendo de esta forma el riesgo de accidentes.',
-          link: undefined // No hay enlace para esta sección en el HTML original
+          link: undefined
         }
       ]
     }

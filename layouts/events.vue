@@ -34,6 +34,7 @@
         </v-row>
       </v-container>
       <benefits-banner />
+      <info-extra />
     </v-main>
   </v-app>
 </template>
