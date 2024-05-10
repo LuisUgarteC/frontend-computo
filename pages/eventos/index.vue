@@ -8,6 +8,6 @@ export default {
   name: 'IndexPage',
   components: { HomeHeader },
   auth: false,
-  layout: 'home'
+  layout: 'events'
 }
 </script>
