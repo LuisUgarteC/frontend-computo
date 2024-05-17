@@ -3,7 +3,7 @@
     <v-main>
       <Nuxt />
 
-      <v-container fluid>
+      <!-- <v-container fluid>
         <v-row no-gutters>
           <v-col :class="['d-flex', 'flex-column']" md="6">
             <div class="d-flex flex-grow-1" :style="backgroundStyle" />
@@ -90,7 +90,43 @@
             </v-container>
           </v-col>
         </v-row>
+      </v-container> -->
+
+      <v-container fluid class="relative max-w-screen-xl mx-auto pa-0">
+        <!-- Imagen del carrusel -->
+        <v-row no-gutters>
+          <v-col cols="12">
+            <v-img src="https://placehold.co/1852x721" alt="RV on the Road" class="w-full object-cover" />
+          </v-col>
+        </v-row>
+
+        <!-- Botones de navegación -->
+        <v-btn
+          absolute
+          top="50%"
+          left="0"
+          class="transform -translate-y-1/2 bg-white bg-opacity-50 text-black p-2 rounded-circle focus:outline-none hover:bg-opacity-75"
+          @click="prevSlide"
+        >
+          <v-icon>mdi-chevron-left</v-icon>
+        </v-btn>
+
+        <v-btn
+          absolute
+          top="50%"
+          right="0"
+          class="transform -translate-y-1/2 bg-white bg-opacity-50 text-black p-2 rounded-circle focus:outline-none hover:bg-opacity-75"
+          @click="nextSlide"
+        >
+          <v-icon>mdi-chevron-right</v-icon>
+        </v-btn>
+
+        <!-- Indicadores del carrusel -->
+        <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          <span v-for="(dot, index) in totalSlides" :key="index" class="h-3 w-3 bg-white rounded-full" />
+        </div>
       </v-container>
+
       <benefits-banner />
       <info-extra />
     </v-main>
@@ -99,15 +135,29 @@
 
 <script>
 export default {
+  // data () {
+  //   return {
+  //     backgroundStyle: {
+  //       backgroundImage: "url('https://placehold.co/600x500')",
+  //       backgroundSize: 'cover',
+  //       backgroundPosition: 'center center'
+  //     },
+  //     selectedOrigin: null,
+  //     origins: ['León', 'Ciudad de México']
+  //   }
+  // }
+
   data () {
     return {
-      backgroundStyle: {
-        backgroundImage: "url('https://placehold.co/600x500')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center center'
-      },
-      selectedOrigin: null,
-      origins: ['León', 'Ciudad de México']
+      totalSlides: 5 // Cambia esto según el número de diapositivas
+    }
+  },
+  methods: {
+    prevSlide () {
+      // Lógica para ir a la diapositiva anterior
+    },
+    nextSlide () {
+      // Lógica para ir a la siguiente diapositiva
     }
   }
 }

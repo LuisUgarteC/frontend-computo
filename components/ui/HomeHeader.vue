@@ -6,7 +6,6 @@
           <v-btn icon href="#" class="mr-2">
             <v-img
               src="https://placehold.co/100x50"
-              alt="Logo"
               height="40"
             />
           </v-btn>
