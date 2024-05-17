@@ -103,6 +103,7 @@
           </v-col>
         </v-row>
       </v-container>
+      <info-footer />
     </v-main>
   </v-app>
 </template>

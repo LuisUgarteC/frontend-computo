@@ -93,14 +93,12 @@
       </v-container> -->
 
       <v-container fluid class="relative max-w-screen-xl mx-auto pa-0">
-        <!-- Imagen del carrusel -->
         <v-row no-gutters>
           <v-col cols="12">
             <v-img src="https://placehold.co/1852x721" alt="RV on the Road" class="w-full object-cover" />
           </v-col>
         </v-row>
 
-        <!-- Botones de navegación -->
         <v-btn
           absolute
           top="50%"
@@ -121,7 +119,6 @@
           <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
 
-        <!-- Indicadores del carrusel -->
         <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2">
           <span v-for="(dot, index) in totalSlides" :key="index" class="h-3 w-3 bg-white rounded-full" />
         </div>
@@ -129,6 +126,7 @@
 
       <benefits-banner />
       <info-extra />
+      <info-footer />
     </v-main>
   </v-app>
 </template>

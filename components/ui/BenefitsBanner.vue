@@ -1,5 +1,5 @@
 <template>
-  <v-main>
+  <v-main class="pa-0 ma-0">
     <div class="benefits-container">
       <v-container>
         <v-row justify="center">

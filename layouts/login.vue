@@ -65,6 +65,7 @@
         </v-row>
       </v-container>
       <info-extra />
+      <info-footer />
     </v-main>
   </v-app>
 </template>

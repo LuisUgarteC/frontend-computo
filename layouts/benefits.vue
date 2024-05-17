@@ -34,6 +34,7 @@
         </v-container>
       </div>
       <info-extra />
+      <info-footer />
     </v-main>
   </v-app>
 </template>
@@ -58,10 +59,12 @@ export default {
 <style scoped>
 .text-center {
   text-align: center;
+  padding: 0 !important;
 }
 .benefits-container {
   background-color: #f1f6fb;
   margin-top: 20px;
+  padding: 0 !important;
 }
 
 </style>
