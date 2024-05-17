@@ -14,9 +14,6 @@
         <p class="text-subtitle-1 grey--text my-4">
           {{ item.description }}
         </p>
-        <v-btn v-if="item.link" text :href="item.link" color="blue">
-          Conoce más de Connectando
-        </v-btn>
       </v-col>
     </v-row>
   </v-container>

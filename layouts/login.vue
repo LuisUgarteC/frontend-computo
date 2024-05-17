@@ -46,10 +46,10 @@
                 class="mb-4"
                 prepend-icon="mdi-lock"
               />
-              <v-checkbox id="remember" label="RECORDAR CUENTA" class="mb-4" />
+              <!-- <v-checkbox id="remember" label="RECORDAR CUENTA" class="mb-4" />
               <v-btn text small color="blue">
                 ¿Olvidaste la contraseña?
-              </v-btn>
+              </v-btn> -->
               <v-btn
                 color="green"
                 block
@@ -85,26 +85,26 @@ export default {
     }
   },
   methods: {
-    login () {
+    async login () {
+      // eslint-disable-next-line no-console
+      await console.log('@@@ datos => ', this.email, this.password)
       const sendData = {
         email: this.email,
         password: this.password
       }
-      this.$auth.loginWith('local', { data: sendData })
-        .then((res) => {
-          if (res.data.message === 'success') {
-            // eslint-disable-next-line no-console
-            console.log('Inicio de sesión exitoso:', res.data)
-            this.$router.push('/')
-          } else {
-            // eslint-disable-next-line no-console
-            console.error('Inicio de sesión fallido:', res.data.message)
-          }
-        })
-        .catch((err) => {
-          // eslint-disable-next-line no-console
-          console.error('Error durante el inicio de sesión:', err)
-        })
+      await this.$auth.loginWith('local', {
+        data: sendData
+      }).then(async (res) => {
+        // eslint-disable-next-line no-console
+        const result = await res.data
+        if (result.message === 'success') {
+          // this.$store.commit('setToken', result.token)
+          this.$router.push('/viajes')
+        }
+      }).catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log('@@@ error => ', err)
+      })
     }
   }
 }

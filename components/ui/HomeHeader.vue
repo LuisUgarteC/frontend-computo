@@ -27,16 +27,13 @@
             <v-btn text href="#" color="black">
               Nosotros
             </v-btn>
-            <v-btn text href="#" color="black">
-              Ayuda
-            </v-btn>
           </v-row>
         </v-col>
         <v-col cols="auto">
           <v-btn rounded @click="navigateToLogin">
             Iniciar Sesión
           </v-btn>
-          <v-btn color="green" dark rounded href="#">
+          <v-btn color="green" dark rounded @click="navigateToRegister">
             Regístrate gratis
           </v-btn>
         </v-col>
@@ -56,6 +53,9 @@ export default {
     },
     navigateToBenefits () {
       this.$router.push('beneficios')
+    },
+    navigateToRegister () {
+      this.$router.push('/register')
     }
   }
 }
