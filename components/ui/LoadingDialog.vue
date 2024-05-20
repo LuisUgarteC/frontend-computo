@@ -39,6 +39,7 @@ export default {
     autoClose () {
       setTimeout(() => {
         this.dialog = false
+        this.$emit('close')
       }, 3000)
     }
   }

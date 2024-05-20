@@ -2,21 +2,6 @@
   <v-app>
     <v-main>
       <Nuxt />
-      <!-- <v-list>
-        <v-list-item
-          v-for="[icon, text, ruta] in links"
-          :key="icon"
-          :to="ruta"
-        >
-          <v-list-item-icon>
-            <v-icon> {{ icon }} </v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title> {{ text }} </v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list> -->
       <v-container class="ma-10 bg-red-100 p-4 rounded-xl shadow-lg d-flex align-center justify-space-between">
         <v-row class="w-full d-flex align-center justify-space-between">
           <v-col cols="12" md="auto" class="d-flex align-center space-x-2 bg-white p-2 rounded-lg mb-2 mb-md-0">
@@ -64,7 +49,7 @@
           </v-col>
 
           <v-col cols="12" md="auto" class="d-flex align-center space-x-1">
-            <v-btn color="red darken-1" dark class="d-flex align-center space-x-1" @click="showLoader = true">
+            <v-btn color="red darken-1" dark class="d-flex align-center space-x-1" @click="handleSearch">
               <v-icon left>
                 mdi-magnify
               </v-icon>
@@ -73,7 +58,13 @@
           </v-col>
         </v-row>
       </v-container>
-      <loading-dialog v-model="showLoader" />
+      <div v-if="showBanner">
+        <v-img
+          src="https://placehold.co/1200x400/00C4CC/FFFFFF?text=Web+Banner"
+        />
+      </div>
+      <loading-dialog v-model="showLoader" @close="onLoadingDialogClose" />
+      <travel-cards v-if="!showBanner" />
       <benefits-banner />
       <info-extra />
       <info-footer />
@@ -83,19 +74,16 @@
 
 <script>
 import LoadingDialog from '@/components/ui/LoadingDialog.vue'
+import TravelCards from '~/components/ui/TravelCards.vue'
 export default {
   components: {
-    LoadingDialog
+    LoadingDialog,
+    TravelCards
   },
-  // data: () => ({
-  //   drawer: null,
-  //   links: [
-  //     ['mdi-account', 'Usuarios', '/viajes']
-  //   ]
-  // })
   data () {
     return {
       showLoader: false,
+      showBanner: true,
       origenes: [
         { text: 'Origen 1', value: 1 },
         { text: 'Origen 2', value: 2 },
@@ -106,6 +94,15 @@ export default {
         { text: 'Destino 2', value: 2 },
         { text: 'Destino 3', value: 3 }
       ]
+    }
+  },
+  methods: {
+    handleSearch () {
+      this.showLoader = true
+    },
+    onLoadingDialogClose () {
+      this.showLoader = false
+      this.showBanner = false
     }
   }
 }
