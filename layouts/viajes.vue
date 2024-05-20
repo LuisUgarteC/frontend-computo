@@ -22,7 +22,6 @@
           <v-col cols="12" md="auto" class="d-flex align-center space-x-2 bg-white p-2 rounded-lg mb-2 mb-md-0">
             <span class="font-semibold">Origen</span>
             <div class="d-flex align-center space-x-1">
-              <!-- <v-img aria-hidden="true" alt="location icon" src="https://placehold.co/20x20" class="h-5 w-5" /> -->
               <v-icon left>
                 mdi-bus-marker
               </v-icon>
@@ -39,7 +38,6 @@
           <v-col cols="12" md="auto" class="d-flex align-center space-x-2 bg-white p-2 rounded-lg mb-2 mb-md-0">
             <span class="font-semibold">Destino</span>
             <div class="d-flex align-center space-x-1">
-              <!-- <v-img aria-hidden="true" alt="airplane icon" src="https://placehold.co/20x20" class="h-5 w-5" /> -->
               <v-icon left>
                 mdi-map-marker-radius
               </v-icon>
@@ -66,8 +64,7 @@
           </v-col>
 
           <v-col cols="12" md="auto" class="d-flex align-center space-x-1">
-            <v-btn color="red darken-1" dark class="d-flex align-center space-x-1">
-              <!-- <v-img aria-hidden="true" alt="search icon" src="https://placehold.co/20x20" class="h-5 w-5" /> -->
+            <v-btn color="red darken-1" dark class="d-flex align-center space-x-1" @click="showLoader = true">
               <v-icon left>
                 mdi-magnify
               </v-icon>
@@ -76,6 +73,7 @@
           </v-col>
         </v-row>
       </v-container>
+      <loading-dialog v-model="showLoader" />
       <benefits-banner />
       <info-extra />
       <info-footer />
@@ -84,7 +82,11 @@
 </template>
 
 <script>
+import LoadingDialog from '@/components/ui/LoadingDialog.vue'
 export default {
+  components: {
+    LoadingDialog
+  },
   // data: () => ({
   //   drawer: null,
   //   links: [
@@ -93,6 +95,7 @@ export default {
   // })
   data () {
     return {
+      showLoader: false,
       origenes: [
         { text: 'Origen 1', value: 1 },
         { text: 'Origen 2', value: 2 },

@@ -10,7 +10,7 @@ export default {
   components: { HomeHeader },
   auth: true,
   layout: 'viajes'
-  // // --- posibles cambio a partir de ahora ---
+  // // --- posibles cambi o a partir de ahora ---
   // computed: {
   //   ...mapState({
   //     token: state => state.token
