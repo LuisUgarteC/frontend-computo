@@ -1,60 +1,59 @@
 <template>
   <v-container>
-    <div class="flex justify-between flex-wrap">
+    <v-row>
       <!-- Ruta de ida -->
-      <div class="flex flex-col items-center gap-4 p-4 w-full md:w-1/2">
+      <v-col>
         <v-container>
-          <div class="flex flex-wrap justify-center gap-4">
+          <div>
             <v-card
               v-for="(schedule, index) in schedulesIda"
               :key="'ida-' + index"
-              class="bg-white dark:bg-zinc-800 shadow-lg rounded-lg p-4 max-w-sm w-full md:w-72 border border-transparent hover:border-blue-500 cursor-pointer transition-all"
-              :class="{ 'bg-blue-100': selectedCard === index, 'border-blue-500': selectedCard === index, 'border-transparent': selectedCard !== index }"
-              @click="selectCard(index)"
+              class="mb-6"
+              @click="selectCard('ida', index)"
             >
-              <v-card-title class="text-xl font-bold text-zinc-800 dark:text-white">
+              <v-card-title>
                 {{ schedule.route }}
               </v-card-title>
-              <v-card-subtitle class="flex justify-between items-center mb-4">
+              <v-card-subtitle class="mb-4">
                 <div>
-                  <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                  <p>
                     {{ schedule.date }}
                   </p>
                 </div>
                 <div>
-                  <v-chip class="bg-green-200 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
+                  <v-chip class="rounded">
                     {{ schedule.participants }} usuario(s)
                   </v-chip>
-                  <span class="text-zinc-400 dark:text-zinc-500">🚍</span>
+                  <span>🚍</span>
                 </div>
               </v-card-subtitle>
               <v-card-text>
-                <div class="mb-4">
-                  <h3 class="font-semibold text-zinc-800 dark:text-white">
+                <div>
+                  <h3>
                     PUNTO DE ENCUENTRO
                   </h3>
-                  <p class="text-zinc-600 dark:text-zinc-400">
+                  <p>
                     {{ schedule.meetingPoint }}
                   </p>
-                  <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                  <p>
                     Duración: {{ schedule.duration }}
                   </p>
                 </div>
                 <div class="mb-4">
-                  <h3 class="font-semibold text-zinc-800 dark:text-white">
+                  <h3>
                     Itinerario:
                   </h3>
-                  <ul class="text-zinc-600 dark:text-zinc-400">
+                  <ul>
                     <li v-for="(item, idx) in schedule.itinerary" :key="idx">
                       {{ item }}
                     </li>
                   </ul>
                 </div>
-                <div class="flex justify-between items-center">
-                  <p class="text-zinc-800 dark:text-white font-bold">
+                <div>
+                  <p>
                     {{ schedule.price }}
                   </p>
-                  <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                  <p>
                     Lugares disponibles: {{ schedule.availableSeats }}
                   </p>
                 </div>
@@ -62,61 +61,60 @@
             </v-card>
           </div>
         </v-container>
-      </div>
+      </v-col>
       <!-- Ruta de regreso -->
-      <div class="flex flex-col items-center gap-4 p-4 w-1/2">
+      <v-col>
         <v-container>
-          <div class="flex flex-wrap justify-center gap-4 w-full">
+          <div>
             <v-card
               v-for="(schedule, index) in schedulesRegreso"
-              :key="index"
-              class="bg-white dark:bg-zinc-800 shadow-lg rounded-lg p-4 w-60 border border-transparent hover:border-blue-500 cursor-pointer transition-all"
-              :class="{ 'bg-blue-100': selectedCard === index, 'border-blue-500': selectedCard === index, 'border-transparent': selectedCard !== index }"
-              @click="selectCard(index)"
+              :key="'regreso-' + index"
+              class="mb-6"
+              @click="selectCard('regreso', index)"
             >
-              <v-card-title class="text-xl font-bold text-zinc-800 dark:text-white">
+              <v-card-title>
                 {{ schedule.route }}
               </v-card-title>
-              <v-card-subtitle class="flex justify-between items-center mb-4">
+              <v-card-subtitle class="mb-4">
                 <div>
-                  <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                  <p>
                     {{ schedule.date }}
                   </p>
                 </div>
                 <div>
-                  <v-chip class="bg-green-200 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded">
+                  <v-chip class="rounded">
                     {{ schedule.participants }} usuario(s)
                   </v-chip>
-                  <span class="text-zinc-400 dark:text-zinc-500">🚍</span>
+                  <span>🚍</span>
                 </div>
               </v-card-subtitle>
               <v-card-text>
-                <div class="mb-4">
-                  <h3 class="font-semibold text-zinc-800 dark:text-white">
+                <div>
+                  <h3>
                     PUNTO DE ENCUENTRO
                   </h3>
-                  <p class="text-zinc-600 dark:text-zinc-400">
+                  <p>
                     {{ schedule.meetingPoint }}
                   </p>
-                  <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                  <p>
                     Duración: {{ schedule.duration }}
                   </p>
                 </div>
                 <div class="mb-4">
-                  <h3 class="font-semibold text-zinc-800 dark:text-white">
+                  <h3>
                     Itinerario:
                   </h3>
-                  <ul class="text-zinc-600 dark:text-zinc-400">
+                  <ul>
                     <li v-for="(item, idx) in schedule.itinerary" :key="idx">
                       {{ item }}
                     </li>
                   </ul>
                 </div>
-                <div class="flex justify-between items-center">
-                  <p class="text-zinc-800 dark:text-white font-bold">
+                <div>
+                  <p>
                     {{ schedule.price }}
                   </p>
-                  <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                  <p>
                     Lugares disponibles: {{ schedule.availableSeats }}
                   </p>
                 </div>
@@ -124,8 +122,8 @@
             </v-card>
           </div>
         </v-container>
-      </div>
-    </div>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -141,7 +139,12 @@ export default {
           participants: 3,
           meetingPoint: 'Hotel JW Marriott frente Auditorio Nacional',
           duration: '4:30 hrs. León',
-          itinerary: ['Estacionamiento Hotel Hotsson Smart Centro Max', 'OxxoGas Plaza Mayor', 'Parque Metropolitano', 'OxxoGas Plaza Mayor'],
+          itinerary: [
+            'Estacionamiento Hotel Hotsson Smart Centro Max',
+            'OxxoGas Plaza Mayor',
+            'Parque Metropolitano',
+            'OxxoGas Plaza Mayor'
+          ],
           price: '$350.00 c/u',
           availableSeats: 14
         },
@@ -151,7 +154,12 @@ export default {
           participants: 3,
           meetingPoint: 'Oxxo Gas Plaza Mayor',
           duration: '4:45 hrs. Ciudad de México',
-          itinerary: ['Tepoztlán', 'Hotel JW Marriott Frente Auditorio Nacional', 'Museo del Niño', 'Hotel JW Marriott Frente Auditorio Nacional'],
+          itinerary: [
+            'Tepoztlán',
+            'Hotel JW Marriott Frente Auditorio Nacional',
+            'Museo del Niño',
+            'Hotel JW Marriott Frente Auditorio Nacional'
+          ],
           price: '$350.00 c/u',
           availableSeats: 8
         },
@@ -161,7 +169,12 @@ export default {
           participants: 3,
           meetingPoint: 'Hotel JW Marriott frente Auditorio Nacional',
           duration: '4:30 hrs. León',
-          itinerary: ['Estacionamiento Hotel Hotsson Smart Centro Max', 'OxxoGas Plaza Mayor', 'Parque Metropolitano', 'OxxoGas Plaza Mayor'],
+          itinerary: [
+            'Estacionamiento Hotel Hotsson Smart Centro Max',
+            'OxxoGas Plaza Mayor',
+            'Parque Metropolitano',
+            'OxxoGas Plaza Mayor'
+          ],
           price: '$350.00 c/u',
           availableSeats: 2
         },
@@ -171,32 +184,40 @@ export default {
           participants: 3,
           meetingPoint: 'Oxxo Gas Plaza Mayor',
           duration: '4:45 hrs. Ciudad de México',
-          itinerary: ['Tepoztlán', 'Hotel JW Marriott Frente Auditorio Nacional', 'Museo del Niño', 'Hotel JW Marriott Frente Auditorio Nacional'],
+          itinerary: [
+            'Tepoztlán',
+            'Hotel JW Marriott Frente Auditorio Nacional',
+            'Museo del Niño',
+            'Hotel JW Marriott Frente Auditorio Nacional'
+          ],
           price: '$350.00 c/u',
           availableSeats: 10
         }
       ],
-      selectedCard: null
+      selectedIda: null,
+      selectedRegreso: null
     }
   },
   computed: {
     schedulesIda () {
-      // Filtrar las rutas de ida
-      return this.schedules.filter(schedule => schedule.route.includes('CIUDAD DE MÉXICO →'))
+      return this.schedules.filter(schedule =>
+        schedule.route.includes('CIUDAD DE MÉXICO → LEÓN')
+      )
     },
     schedulesRegreso () {
-      // Filtrar las rutas de regreso
-      return this.schedules.filter(schedule => schedule.route.includes('LEÓN → CIUDAD DE MÉXICO'))
+      return this.schedules.filter(schedule =>
+        schedule.route.includes('LEÓN → CIUDAD DE MÉXICO')
+      )
     }
   },
   methods: {
-    selectCard (index) {
-      this.selectedCard = index
+    selectCard (type, index) {
+      if (type === 'ida') {
+        this.selectedIda = index
+      } else if (type === 'regreso') {
+        this.selectedRegreso = index
+      }
     }
   }
 }
 </script>
-
-<style scoped>
-/* Add any additional styling if needed */
-</style>

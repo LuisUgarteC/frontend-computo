@@ -60,7 +60,7 @@
       </v-container>
       <div v-if="showBanner">
         <v-img
-          src="https://placehold.co/1200x400/00C4CC/FFFFFF?text=Web+Banner"
+          src="https://placehold.co/1200x400"
         />
       </div>
       <loading-dialog v-model="showLoader" @close="onLoadingDialogClose" />
