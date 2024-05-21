@@ -9,6 +9,7 @@
               v-for="(schedule, index) in schedulesIda"
               :key="'ida-' + index"
               class="mb-6"
+              :class="{ 'selected-card': selectedIda === index }"
               @click="selectCard('ida', index)"
             >
               <v-card-title>
@@ -49,12 +50,12 @@
                     </li>
                   </ul>
                 </div>
-                <div>
-                  <p>
-                    {{ schedule.price }}
-                  </p>
-                  <p>
+                <div class="d-flex justify-space-between align-center">
+                  <p class="available-seats">
                     Lugares disponibles: {{ schedule.availableSeats }}
+                  </p>
+                  <p class="price">
+                    {{ schedule.price }}
                   </p>
                 </div>
               </v-card-text>
@@ -70,6 +71,7 @@
               v-for="(schedule, index) in schedulesRegreso"
               :key="'regreso-' + index"
               class="mb-6"
+              :class="{ 'selected-card': selectedRegreso === index }"
               @click="selectCard('regreso', index)"
             >
               <v-card-title>
@@ -110,12 +112,12 @@
                     </li>
                   </ul>
                 </div>
-                <div>
-                  <p>
-                    {{ schedule.price }}
-                  </p>
-                  <p>
+                <div class="d-flex justify-space-between align-center">
+                  <p class="available-seats">
                     Lugares disponibles: {{ schedule.availableSeats }}
+                  </p>
+                  <p class="price">
+                    {{ schedule.price }}
                   </p>
                 </div>
               </v-card-text>
@@ -221,3 +223,16 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.selected-card {
+  background-color: #d3d3d3;
+}
+.available-seats {
+  font-size: 16px;
+}
+.price {
+  font-size: 24px;
+  font-weight: bold;
+}
+</style>
