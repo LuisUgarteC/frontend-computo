@@ -126,6 +126,12 @@
         </v-container>
       </v-col>
     </v-row>
+    <!-- <v-btn color="blue darken-1" dark class="d-flex align-center space-x-1" @click="Continue">
+      <v-icon left>
+        mdi-car-seat
+      </v-icon>
+      <span>Continuar</span>
+    </v-btn> -->
   </v-container>
 </template>
 

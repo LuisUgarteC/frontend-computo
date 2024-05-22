@@ -2,7 +2,7 @@
   <v-app>
     <v-main>
       <Nuxt />
-      <v-container class="ma-10 bg-red-100 p-4 rounded-xl shadow-lg d-flex align-center justify-space-between">
+      <v-container class="ma-10 p-4 rounded-xl shadow-lg d-flex align-center justify-space-between">
         <v-row class="w-full d-flex align-center justify-space-between">
           <v-col cols="12" md="auto" class="d-flex align-center space-x-2 bg-white p-2 rounded-lg mb-2 mb-md-0">
             <span class="font-semibold">Origen</span>
@@ -65,6 +65,7 @@
       </div>
       <loading-dialog v-model="showLoader" @close="onLoadingDialogClose" />
       <travel-cards v-if="!showBanner" />
+      <seat-selector />
       <benefits-banner />
       <info-extra />
       <info-footer />
