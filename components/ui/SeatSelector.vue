@@ -65,8 +65,16 @@ export default {
   },
   methods: {
     toggleSeatSelection (seatId) {
+      const selectedSeats = this.seats.filter(seat => seat.selected).length
       const seat = this.seats.find(seat => seat.id === seatId)
-      if (seat && seat.type === 'passenger') { seat.selected = !seat.selected }
+      if (seat && seat.type === 'passenger') {
+        if (seat.selected) {
+          seat.selected = false
+        } else if (selectedSeats < 5) {
+          seat.selected = true
+        }
+      }
+      this.$emit('seats-selected', this.seats.filter(seat => seat.selected).length)
     }
   }
 }

@@ -65,7 +65,19 @@
       </div>
       <loading-dialog v-model="showLoader" @close="onLoadingDialogClose" />
       <travel-cards v-if="!showBanner" />
-      <seat-selector />
+      <v-container class="pa-10">
+        <v-row>
+          <v-col cols="12" md="4">
+            <seat-selector @seats-selected="updateSeatCount" />
+          </v-col>
+          <v-col cols="12" md="4">
+            <passengers-info :seat-count="seatCount" />
+          </v-col>
+          <v-col cols="12" md="4">
+            <car-details />
+          </v-col>
+        </v-row>
+      </v-container>
       <benefits-banner />
       <info-extra />
       <info-footer />
@@ -76,15 +88,23 @@
 <script>
 import LoadingDialog from '@/components/ui/LoadingDialog.vue'
 import TravelCards from '~/components/ui/TravelCards.vue'
+import SeatSelector from '~/components/ui/SeatSelector.vue'
+import PassengersInfo from '~/components/ui/PassengersInfo.vue'
+import CarDetails from '~/components/ui/CarDetails.vue'
+
 export default {
   components: {
     LoadingDialog,
-    TravelCards
+    TravelCards,
+    SeatSelector,
+    PassengersInfo,
+    CarDetails
   },
   data () {
     return {
       showLoader: false,
       showBanner: true,
+      seatCount: 1,
       origenes: [
         { text: 'Origen 1', value: 1 },
         { text: 'Origen 2', value: 2 },
@@ -104,6 +124,9 @@ export default {
     onLoadingDialogClose () {
       this.showLoader = false
       this.showBanner = false
+    },
+    updateSeatCount (count) {
+      this.seatCount = count
     }
   }
 }
