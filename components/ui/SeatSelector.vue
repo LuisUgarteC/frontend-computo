@@ -70,11 +70,11 @@ export default {
       if (seat && seat.type === 'passenger') {
         if (seat.selected) {
           seat.selected = false
-        } else if (selectedSeats < 5) {
+        } else if (selectedSeats < 4) {
           seat.selected = true
         }
       }
-      this.$emit('seats-selected', this.seats.filter(seat => seat.selected).length)
+      this.$emit('seats-selected', this.seats.filter(seat => seat.selected))
     }
   }
 }

@@ -68,10 +68,10 @@
       <v-container class="pa-10">
         <v-row>
           <v-col cols="12" md="4">
-            <seat-selector @seats-selected="updateSeatCount" />
+            <seat-selector @seats-selected="updateSelectedSeats" />
           </v-col>
           <v-col cols="12" md="4">
-            <passengers-info :seat-count="seatCount" />
+            <passengers-info :selected-seats="selectedSeats" />
           </v-col>
           <v-col cols="12" md="4">
             <car-details />
@@ -104,7 +104,7 @@ export default {
     return {
       showLoader: false,
       showBanner: true,
-      seatCount: 1,
+      selectedSeats: [],
       origenes: [
         { text: 'Origen 1', value: 1 },
         { text: 'Origen 2', value: 2 },
@@ -125,8 +125,8 @@ export default {
       this.showLoader = false
       this.showBanner = false
     },
-    updateSeatCount (count) {
-      this.seatCount = count
+    updateSelectedSeats (seats) {
+      this.selectedSeats = seats
     }
   }
 }

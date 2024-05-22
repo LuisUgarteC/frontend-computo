@@ -1,11 +1,19 @@
 <template>
   <v-container class="max-w-md mx-auto">
     <v-col id="passengerList" class="space-y-4">
-      <v-row v-for="n in passengerCount" :key="n">
+      <v-row v-for="(seat, index) in selectedSeats" :key="seat.id">
         <v-col>
           <v-card class="bg-grey lighten-4 rounded-lg shadow">
-            <v-card-title class="font-bold text-lg">
-              PASAJERO #{{ n }}
+            <v-card-title class="font-bold text-lg d-flex align-items-center">
+              PASAJERO #{{ index + 1 }} →
+              <v-img
+                :src="require('@/assets/img/seat-full.png')"
+                alt="seat-img"
+                max-width="30"
+                max-height="30"
+                class="ml-1"
+              />
+              {{ seat.label }}
             </v-card-title>
             <v-card-text>
               <v-form>
@@ -20,8 +28,8 @@
                   </v-col>
                   <v-col cols="12">
                     <v-select
-                      label="Asiento"
-                      :items="['Seleccione su tipo de asiento', 'Adulto', 'Menor']"
+                      label="Tipo de Pasajero"
+                      :items="['Adulto', 'Menor']"
                       outlined
                       dense
                     />
@@ -39,14 +47,9 @@
 <script>
 export default {
   props: {
-    seatCount: {
-      type: Number,
+    selectedSeats: {
+      type: Array,
       required: true
-    }
-  },
-  computed: {
-    passengerCount () {
-      return this.seatCount
     }
   }
 }
