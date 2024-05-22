@@ -120,18 +120,21 @@
         </v-container>
       </v-col>
     </v-row>
-    <!-- <v-btn color="blue darken-1" dark class="d-flex align-center space-x-1" @click="Continue">
-      <v-icon left>
-        mdi-car-seat
-      </v-icon>
-      <span>Continuar</span>
-    </v-btn> -->
+    <div class="d-flex flex-row justify-center">
+      <v-btn class="yellow darken-4 white--text" @click="continueToSeats">
+        Continuar
+        <v-icon class="ml-1">
+          mdi-seat
+        </v-icon>
+      </v-btn>
+      <travel-details ref="travelDetailsDialog" />
+    </div>
   </v-container>
 </template>
 
 <script>
 export default {
-  name: 'ScheduledRoutes',
+  name: 'TravelCards',
   data () {
     return {
       schedules: [
@@ -219,6 +222,9 @@ export default {
       } else if (type === 'regreso') {
         this.selectedRegreso = index
       }
+    },
+    continueToSeats () {
+      this.$emit('continue')
     }
   }
 }

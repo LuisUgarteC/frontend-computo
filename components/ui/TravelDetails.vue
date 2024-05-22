@@ -20,7 +20,7 @@
               {{ pasajero.tipo }}
             </p>
             <p class="grey--text" style="margin-top: -10px;">
-              Asiento: {{ pasajero.asiento }}
+              {{ pasajero.asiento }}
             </p>
           </div>
           <div class="d-flex justify-end grey--text text-lg font-semibold">

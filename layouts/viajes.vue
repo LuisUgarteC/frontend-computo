@@ -59,13 +59,11 @@
         </v-row>
       </v-container>
       <div v-if="showBanner">
-        <v-img
-          src="https://placehold.co/1200x400"
-        />
+        <v-img src="https://placehold.co/1200x400" />
       </div>
       <loading-dialog v-model="showLoader" @close="onLoadingDialogClose" />
-      <travel-cards v-if="!showBanner" />
-      <v-container class="pa-10">
+      <travel-cards v-if="!showBanner" @continue="showComponents = true" />
+      <v-container v-if="showComponents" class="pa-1">
         <v-row>
           <v-col cols="12" md="4">
             <seat-selector @seats-selected="updateSelectedSeats" />
@@ -77,9 +75,8 @@
             <car-details />
           </v-col>
         </v-row>
+        <end-buttons />
       </v-container>
-      <travel-details />
-      <end-buttons />
       <benefits-banner />
       <info-extra />
       <info-footer />
@@ -88,24 +85,12 @@
 </template>
 
 <script>
-// import LoadingDialog from '@/components/ui/LoadingDialog.vue'
-// import TravelCards from '~/components/ui/TravelCards.vue'
-// import SeatSelector from '~/components/ui/SeatSelector.vue'
-// import PassengersInfo from '~/components/ui/PassengersInfo.vue'
-// import CarDetails from '~/components/ui/CarDetails.vue'
-
 export default {
-  // components: {
-  //   LoadingDialog,
-  //   TravelCards,
-  //   SeatSelector,
-  //   PassengersInfo,
-  //   CarDetails
-  // },
   data () {
     return {
       showLoader: false,
       showBanner: true,
+      showComponents: false,
       selectedSeats: [],
       origenes: [
         { text: 'Origen 1', value: 1 },
