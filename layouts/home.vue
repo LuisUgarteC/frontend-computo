@@ -92,7 +92,7 @@
         </v-row>
       </v-container> -->
 
-      <v-container fluid class="relative max-w-screen-xl mx-auto pa-0">
+      <!-- <v-container fluid class="relative max-w-screen-xl mx-auto pa-0">
         <v-row no-gutters>
           <v-col cols="12">
             <v-img src="https://placehold.co/1852x721" alt="RV on the Road" class="w-full object-cover" />
@@ -122,7 +122,18 @@
         <div class="absolute bottom-5 left-1/2 transform -translate-x-1/2 flex space-x-2">
           <span v-for="(dot, index) in totalSlides" :key="index" class="h-3 w-3 bg-white rounded-full" />
         </div>
-      </v-container>
+      </v-container> -->
+
+      <v-card class="pa-0 ma-0">
+        <v-carousel :show-arrows-on-hover="true" cycle :interval="4000" delimiter-icon="mdi-rhombus" hide-delimiter-background>
+          <v-carousel-item
+            v-for="(imagen, i) in imagenes"
+            :key="i"
+            :src="imagen.src"
+            cover
+          />
+        </v-carousel>
+      </v-card>
 
       <benefits-banner />
       <info-extra />
@@ -145,17 +156,28 @@ export default {
   //   }
   // }
 
+  // data () {
+  //   return {
+  //     totalSlides: 5 // Cambia esto según el número de diapositivas
+  //   }
+  // },
+  // methods: {
+  //   prevSlide () {
+  //     // Lógica para ir a la diapositiva anterior
+  //   },
+  //   nextSlide () {
+  //     // Lógica para ir a la siguiente diapositiva
+  //   }
+  // }
+
   data () {
     return {
-      totalSlides: 5 // Cambia esto según el número de diapositivas
-    }
-  },
-  methods: {
-    prevSlide () {
-      // Lógica para ir a la diapositiva anterior
-    },
-    nextSlide () {
-      // Lógica para ir a la siguiente diapositiva
+      imagenes: [
+        { src: 'https://placehold.co/100x50' },
+        { src: 'https://placehold.co/100x51' },
+        { src: 'https://placehold.co/100x52' },
+        { src: 'https://placehold.co/100x53' }
+      ]
     }
   }
 }
