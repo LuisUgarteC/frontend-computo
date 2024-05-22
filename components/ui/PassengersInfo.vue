@@ -1,6 +1,6 @@
 <template>
-  <v-container class="max-w-md mx-auto">
-    <v-col id="passengerList" class="space-y-4">
+  <v-container class="si">
+    <v-col id="passengerList">
       <v-row v-for="(seat, index) in selectedSeats" :key="seat.id">
         <v-col>
           <v-card class="bg-grey lighten-4 rounded-lg shadow">
@@ -56,5 +56,7 @@ export default {
 </script>
 
 <style>
-/* Estilos específicos si los necesitas */
+/* .si {
+  padding-right: 30px;
+} */
 </style>

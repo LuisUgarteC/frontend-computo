@@ -9,6 +9,8 @@ import TravelCards from '@/components/ui/TravelCards'
 import SeatSelector from '@/components/ui/SeatSelector'
 import PassengersInfo from '@/components/ui/PassengersInfo'
 import CarDetails from '@/components/ui/CarDetails'
+import TravelDetails from '@/components/ui/TravelDetails'
+import EndButtons from '@/components/ui/EndButtons'
 
 Vue.component('HomeHeader', HomeHeader)
 Vue.component('BenefitsBanner', BenefitsBanner)
@@ -19,3 +21,5 @@ Vue.component('TravelCards', TravelCards)
 Vue.component('SeatSelector', SeatSelector)
 Vue.component('PassengersInfo', PassengersInfo)
 Vue.component('CarDetails', CarDetails)
+Vue.component('TravelDetails', TravelDetails)
+Vue.component('EndButtons', EndButtons)

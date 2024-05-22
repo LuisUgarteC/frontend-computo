@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-row class="d-flex flex-column align-center pa-4">
+  <v-container style="padding-top: 25px;">
+    <v-row class="flex-column align-center">
       <v-img src="https://placehold.co/200x75" alt="bus-top-view" class="ma-3 pa-2" />
       <v-row class="grid-cols-4 gap-2 pa-4 rounded-lg seating-area shadow-area justify-center" style="width: 300px;">
         <v-col

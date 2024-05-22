@@ -78,6 +78,8 @@
           </v-col>
         </v-row>
       </v-container>
+      <travel-details />
+      <end-buttons />
       <benefits-banner />
       <info-extra />
       <info-footer />
@@ -86,20 +88,20 @@
 </template>
 
 <script>
-import LoadingDialog from '@/components/ui/LoadingDialog.vue'
-import TravelCards from '~/components/ui/TravelCards.vue'
-import SeatSelector from '~/components/ui/SeatSelector.vue'
-import PassengersInfo from '~/components/ui/PassengersInfo.vue'
-import CarDetails from '~/components/ui/CarDetails.vue'
+// import LoadingDialog from '@/components/ui/LoadingDialog.vue'
+// import TravelCards from '~/components/ui/TravelCards.vue'
+// import SeatSelector from '~/components/ui/SeatSelector.vue'
+// import PassengersInfo from '~/components/ui/PassengersInfo.vue'
+// import CarDetails from '~/components/ui/CarDetails.vue'
 
 export default {
-  components: {
-    LoadingDialog,
-    TravelCards,
-    SeatSelector,
-    PassengersInfo,
-    CarDetails
-  },
+  // components: {
+  //   LoadingDialog,
+  //   TravelCards,
+  //   SeatSelector,
+  //   PassengersInfo,
+  //   CarDetails
+  // },
   data () {
     return {
       showLoader: false,

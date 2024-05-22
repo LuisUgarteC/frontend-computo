@@ -18,13 +18,3 @@ export default {
   layout: 'home'
 }
 </script>
-
-<style>
-.header-spacing {
-  margin-bottom: 20px; /* Ajusta este valor según sea necesario */
-}
-
-.benefits-spacing {
-  margin-top: 200px; /* Ajusta este valor según sea necesario */
-}
-</style>
