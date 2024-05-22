@@ -20,7 +20,7 @@
                   </v-col>
                   <v-col cols="12">
                     <v-select
-                      label="Salida"
+                      label="Asiento"
                       :items="['Seleccione su tipo de asiento', 'Adulto', 'Menor']"
                       outlined
                       dense

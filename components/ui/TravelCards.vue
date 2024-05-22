@@ -23,9 +23,9 @@
                 </div>
                 <div>
                   <v-chip class="rounded">
-                    {{ schedule.participants }} usuario(s)
+                    {{ schedule.availableSeats }} Lugares disponibles
                   </v-chip>
-                  <span>🚍</span>
+                  <span>💺</span>
                 </div>
               </v-card-subtitle>
               <v-card-text>
@@ -50,11 +50,8 @@
                     </li>
                   </ul>
                 </div>
-                <div class="d-flex justify-space-between align-center">
-                  <p class="available-seats">
-                    Lugares disponibles: {{ schedule.availableSeats }}
-                  </p>
-                  <p class="price">
+                <div>
+                  <p class="price text-right">
                     {{ schedule.price }}
                   </p>
                 </div>
@@ -85,9 +82,9 @@
                 </div>
                 <div>
                   <v-chip class="rounded">
-                    {{ schedule.participants }} usuario(s)
+                    {{ schedule.availableSeats }} Lugares disponibles
                   </v-chip>
-                  <span>🚍</span>
+                  <span>💺</span>
                 </div>
               </v-card-subtitle>
               <v-card-text>
@@ -112,11 +109,8 @@
                     </li>
                   </ul>
                 </div>
-                <div class="d-flex justify-space-between align-center">
-                  <p class="available-seats">
-                    Lugares disponibles: {{ schedule.availableSeats }}
-                  </p>
-                  <p class="price">
+                <div>
+                  <p class="price text-right">
                     {{ schedule.price }}
                   </p>
                 </div>
