@@ -72,6 +72,7 @@
                 </v-col>
                 <v-col cols="12" md="6">
                   <v-text-field
+                    v-model="cumple"
                     label="CUMPLEAÑOS *"
                     type="date"
                   />
@@ -134,7 +135,8 @@ export default {
         password: this.password,
         nombre: this.nombre,
         apellido: this.apellido,
-        telefono: this.telefono
+        telefono: this.telefono,
+        cumple: this.cumple
       }
       this.$axios.post(url, data)
         .then((res) => {

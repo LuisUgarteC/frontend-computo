@@ -100,6 +100,8 @@ export default {
         const result = await res.data
         if (result.message === 'success') {
           // this.$store.commit('setToken', result.token)
+          localStorage.setItem('userEmail', this.email)
+          localStorage.setItem('userNombre', result.userNombre)
           this.$router.push('/viajes')
         }
       }).catch((err) => {

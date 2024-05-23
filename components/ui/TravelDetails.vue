@@ -10,8 +10,19 @@
 
       <v-card-text>
         <v-divider />
+        <div style="padding-top: 20px">
+          <strong>
+            {{ userEmail }}
+          </strong>
+          {{ userNombre }}
+        </div>
+        <v-divider />
 
         <div v-for="(pasajero, index) in pasajeros" :key="index" class="mb-4">
+          <!-- <h3 class="text-md font-semibold">
+            {{ pasajero.email }}
+          </h3> -->
+
           <h3 class="text-md font-semibold">
             {{ pasajero.nombre }}
           </h3>
@@ -104,6 +115,20 @@ export default {
     horaLlegada: '06:10 AM',
     ciudadLlegada: 'León',
     llegadaDetalles: 'Llega a: Central Nueva'
-  })
+  }),
+  mounted () {
+    this.fetchUserEmail()
+    this.fetchUserNombre()
+  },
+  methods: {
+    fetchUserEmail () {
+      const email = localStorage.getItem('userEmail')
+      this.userEmail = email || 'pilin'
+    },
+    fetchUserNombre () {
+      const nombre = localStorage.getItem('userNombre')
+      this.userNombre = nombre || 'pilin 2'
+    }
+  }
 }
 </script>
