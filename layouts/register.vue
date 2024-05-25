@@ -118,6 +118,7 @@ export default {
       nombre: null,
       apellido: null,
       telefono: null,
+      cumple: null,
       benefits: [
         'Cancelaciones con un solo click *(Sujeto a términos y condiciones).',
         'Viajes gratis.',

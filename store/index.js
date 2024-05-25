@@ -3,7 +3,7 @@ export const state = () => ({
   token: null
 })
 
-export const mutastions = {
+export const mutations = {
   setUser (state, user) {
     state.user = user
   },
