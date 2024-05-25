@@ -114,7 +114,9 @@ export default {
     salidaDetalles: 'Sale de: Coapa',
     horaLlegada: '06:10 AM',
     ciudadLlegada: 'León',
-    llegadaDetalles: 'Llega a: Central Nueva'
+    llegadaDetalles: 'Llega a: Central Nueva',
+    userEmail: '',
+    userNombre: ''
   }),
   mounted () {
     this.fetchUserEmail()
@@ -123,11 +125,11 @@ export default {
   methods: {
     fetchUserEmail () {
       const email = localStorage.getItem('userEmail')
-      this.userEmail = email || 'pilin'
+      this.userEmail = email || 'ERROR'
     },
     fetchUserNombre () {
       const nombre = localStorage.getItem('userNombre')
-      this.userNombre = nombre || 'pilin 2'
+      this.userNombre = nombre || 'ERROR 2'
     }
   }
 }

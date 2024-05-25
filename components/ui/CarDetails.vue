@@ -73,7 +73,7 @@ export default {
       'Estacionamiento Hotel Hotsson Smart Centro Max',
       'OxxoGas Plaza Mayor',
       'Parque Metropolitano',
-      'OxxoGas Plaza Mayor'
+      'OxxoGas Plaza Mayor 2'
     ]
   })
 }
