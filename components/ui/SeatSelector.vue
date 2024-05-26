@@ -7,8 +7,8 @@
           v-for="seat in seats"
           :key="seat.id"
           class="d-flex align-center justify-center position-relative"
+          :class="{ 'hover-enabled': seat.type === 'passenger' && !seat.occupied }"
           cols="1"
-          :style="{ cursor: seat.type === 'passenger' ? 'pointer' : 'default' }"
           @click="seat.type === 'passenger' && !seat.occupied && toggleSeatSelection(seat.id)"
         >
           <v-img
@@ -70,10 +70,10 @@ export default {
         { id: 18, label: 'A12', type: 'passenger', selected: false, occupied: false },
         { id: 19, label: '', type: 'empty', selected: false, occupied: false },
         { id: 20, label: 'A13', type: 'passenger', selected: false, occupied: false },
-        { id: 21, label: 'A14', type: 'occupied', selected: false, occupied: false },
+        { id: 21, label: 'A14', type: 'occupied', selected: false, occupied: true }, // Static occupied seat
         { id: 22, label: 'A15', type: 'passenger', selected: false, occupied: false },
         { id: 23, label: 'A16', type: 'passenger', selected: false, occupied: false },
-        { id: 24, label: 'A17', type: 'occupied', selected: false, occupied: false }
+        { id: 24, label: 'A17', type: 'occupied', selected: false, occupied: true } // Static occupied seat
       ]
     }
   },
@@ -105,6 +105,7 @@ export default {
           })
         }
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error loading occupied seats:', error)
       }
     }
@@ -145,5 +146,8 @@ export default {
   color: black;
   font-size: 0.75rem;
   font-weight: bold;
+}
+.hover-enabled {
+  cursor: pointer;
 }
 </style>

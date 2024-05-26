@@ -106,7 +106,7 @@ export default {
       showBanner: true,
       showComponents: false,
       selectedSeats: [],
-      userEmail: '', // Add userEmail here
+      userEmail: '',
       origenes: [
         { text: 'Origen 1', value: 1 },
         { text: 'Origen 2', value: 2 },
@@ -131,7 +131,7 @@ export default {
       this.selectedSeats = seats
     },
     handlePurchaseSuccess (trip) {
-      // Handle the successful purchase (e.g., show a confirmation message)
+      // eslint-disable-next-line no-console
       console.log('Purchase successful:', trip)
     }
   }

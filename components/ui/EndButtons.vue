@@ -48,6 +48,7 @@ export default {
           this.$emit('purchase-success', response.data.trip)
         }
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error finalizing purchase:', error)
       } finally {
         this.loading = false
