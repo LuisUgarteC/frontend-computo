@@ -63,7 +63,7 @@
       </div>
       <loading-dialog v-model="showLoader" @close="onLoadingDialogClose" />
       <travel-cards v-if="!showBanner" @continue="showComponents = true" />
-      <v-container v-if="showComponents" class="pa-1">
+      <!-- <v-container v-if="showComponents" class="pa-1">
         <v-row>
           <v-col cols="12" md="4">
             <seat-selector @seats-selected="updateSelectedSeats" />
@@ -76,6 +76,20 @@
           </v-col>
         </v-row>
         <end-buttons />
+      </v-container> -->
+      <v-container v-if="showComponents" class="pa-1">
+        <v-row>
+          <v-col cols="12" md="4">
+            <seat-selector @seats-selected="updateSelectedSeats" />
+          </v-col>
+          <v-col cols="12" md="4">
+            <passengers-info :selected-seats="selectedSeats" />
+          </v-col>
+          <v-col cols="12" md="4">
+            <car-details />
+          </v-col>
+        </v-row>
+        <end-buttons :selected-seats="selectedSeats" :user-email="userEmail" @purchase-success="handlePurchaseSuccess" />
       </v-container>
       <benefits-banner />
       <info-extra />
@@ -92,6 +106,7 @@ export default {
       showBanner: true,
       showComponents: false,
       selectedSeats: [],
+      userEmail: '', // Add userEmail here
       origenes: [
         { text: 'Origen 1', value: 1 },
         { text: 'Origen 2', value: 2 },
@@ -114,6 +129,10 @@ export default {
     },
     updateSelectedSeats (seats) {
       this.selectedSeats = seats
+    },
+    handlePurchaseSuccess (trip) {
+      // Handle the successful purchase (e.g., show a confirmation message)
+      console.log('Purchase successful:', trip)
     }
   }
 }

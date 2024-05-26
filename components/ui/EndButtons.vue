@@ -17,6 +17,16 @@
 
 <script>
 export default {
+  props: {
+    selectedSeats: {
+      type: Array,
+      required: true
+    },
+    userEmail: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       price: '$650.00 MXN',
@@ -27,12 +37,21 @@ export default {
     openDetails () {
       this.$refs.travelDetailsDialog.dialog = true
     },
-    finalizePurchase () {
+    async finalizePurchase () {
       this.loading = true
-      setTimeout(() => {
+      try {
+        const response = await this.$axios.post('/create-trip', {
+          userEmail: this.userEmail,
+          seats: this.selectedSeats
+        })
+        if (response.data.message === 'Trip created successfully') {
+          this.$emit('purchase-success', response.data.trip)
+        }
+      } catch (error) {
+        console.error('Error finalizing purchase:', error)
+      } finally {
         this.loading = false
-        // Comprar viaje o asi
-      }, 3000)
+      }
     }
   }
 }
