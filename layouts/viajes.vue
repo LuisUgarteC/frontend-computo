@@ -89,7 +89,7 @@
             <car-details />
           </v-col>
         </v-row>
-        <end-buttons :selected-seats="selectedSeats" :user-email="userEmail" @purchase-success="handlePurchaseSuccess" />
+        <end-buttons :selected-seats="selectedSeats" :user-email="userEmail || ''" @purchase-success="handlePurchaseSuccess" />
       </v-container>
       <benefits-banner />
       <info-extra />
@@ -118,6 +118,11 @@ export default {
         { text: 'Destino 3', value: 3 }
       ]
     }
+  },
+  mounted () {
+    this.userEmail = this.$store.state.userEmail || ''
+    // eslint-disable-next-line no-console
+    console.log('User Email:', this.userEmail)
   },
   methods: {
     handleSearch () {

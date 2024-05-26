@@ -6,7 +6,7 @@
       </v-icon>
     </v-btn>
     <v-btn class="red darken-4 white--text" :loading="loading" @click="finalizePurchase">
-      {{ loading ? 'Procesando... easter egg' : 'Comprar por ' + price }}
+      {{ loading ? 'Procesando...' : 'Comprar por ' + price }}
       <v-icon class="ml-1">
         mdi-cash-check
       </v-icon>

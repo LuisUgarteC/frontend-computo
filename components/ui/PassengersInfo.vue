@@ -20,6 +20,7 @@
                 <v-row class="mt-2">
                   <v-col cols="12">
                     <v-text-field
+                      v-model="seat.passengerName"
                       label="Nombre"
                       placeholder="Ej: Juan Pérez"
                       outlined
@@ -28,6 +29,7 @@
                   </v-col>
                   <v-col cols="12">
                     <v-select
+                      v-model="seat.passengerType"
                       label="Tipo de Pasajero"
                       :items="['Adulto', 'Menor']"
                       outlined

@@ -34,7 +34,7 @@
           />
           <div v-else-if="seat.type === 'driver'" class="position-relative">
             <v-img :src="require('@/assets/img/driver.png')" alt="driver-img" max-width="40" max-height="40" />
-            <span class="overlay-text">Chofer</span>
+            <!-- <span class="overlay-text">Chofer</span> -->
           </div>
           <span class="seat-label">{{ seat.label }}</span>
         </v-col>
@@ -70,10 +70,10 @@ export default {
         { id: 18, label: 'A12', type: 'passenger', selected: false, occupied: false },
         { id: 19, label: '', type: 'empty', selected: false, occupied: false },
         { id: 20, label: 'A13', type: 'passenger', selected: false, occupied: false },
-        { id: 21, label: 'A14', type: 'occupied', selected: false, occupied: true }, // Static occupied seat
+        { id: 21, label: 'A14', type: 'passenger', selected: false, occupied: false },
         { id: 22, label: 'A15', type: 'passenger', selected: false, occupied: false },
         { id: 23, label: 'A16', type: 'passenger', selected: false, occupied: false },
-        { id: 24, label: 'A17', type: 'occupied', selected: false, occupied: true } // Static occupied seat
+        { id: 24, label: 'A17', type: 'passenger', selected: false, occupied: false }
       ]
     }
   },
