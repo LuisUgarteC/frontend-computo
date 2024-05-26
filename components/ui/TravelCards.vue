@@ -3,6 +3,35 @@
     <v-row>
       <!-- Ruta de ida -->
       <v-col>
+        <v-container class="p-4">
+          <div class="p-2 text-center">
+            SELECCIONA TU HORARIO DE IDA
+          </div>
+          <div class="mt-4 text-center">
+            <p>
+              {{ formattedDate }}
+            </p>
+          </div>
+          <v-row class="flex items-center justify-center mt-4">
+            <v-col cols="auto">
+              <div class="text-center">
+                <p>
+                  {{ origin }}
+                </p>
+              </div>
+            </v-col>
+            <v-col cols="auto" class="flex items-center">
+              <v-icon>mdi-van-passenger</v-icon>
+            </v-col>
+            <v-col cols="auto">
+              <div class="text-center">
+                <p>
+                  {{ destination }}
+                </p>
+              </div>
+            </v-col>
+          </v-row>
+        </v-container>
         <v-container>
           <div>
             <v-card
@@ -62,6 +91,35 @@
       </v-col>
       <!-- Ruta de regreso -->
       <v-col>
+        <v-container class="p-4">
+          <div class="p-2 text-center">
+            SELECCIONA TU HORARIO DE REGRESO
+          </div>
+          <div class="mt-4 text-center">
+            <p>
+              {{ formattedDate }}
+            </p>
+          </div>
+          <v-row class="flex items-center justify-center mt-4">
+            <v-col cols="auto">
+              <div class="text-center">
+                <p>
+                  {{ destination }}
+                </p>
+              </div>
+            </v-col>
+            <v-col cols="auto" class="flex items-center">
+              <v-icon>mdi-van-passenger</v-icon>
+            </v-col>
+            <v-col cols="auto">
+              <div class="text-center">
+                <p>
+                  {{ origin }}
+                </p>
+              </div>
+            </v-col>
+          </v-row>
+        </v-container>
         <v-container>
           <div>
             <v-card
@@ -200,7 +258,10 @@ export default {
         }
       ],
       selectedIda: null,
-      selectedRegreso: null
+      selectedRegreso: null,
+      formattedDate: 'viernes, 31 de mayo',
+      origin: 'LEÓN',
+      destination: 'CIUDAD DE MÉXICO'
     }
   },
   computed: {
