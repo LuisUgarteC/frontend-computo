@@ -11,6 +11,7 @@
                 mdi-bus-marker
               </v-icon>
               <v-select
+                v-model="selectedOrigin"
                 :items="origenes"
                 label="Seleccionar Origen"
                 class="outline-none"
@@ -27,6 +28,7 @@
                 mdi-map-marker-radius
               </v-icon>
               <v-select
+                v-model="selectedDestination"
                 :items="destinos"
                 label="Seleccionar Destino"
                 class="outline-none"
@@ -40,6 +42,7 @@
             <span class="font-semibold">¿Cuándo viajas?</span>
             <div class="d-flex align-center space-x-1">
               <v-text-field
+                v-model="selectedDate"
                 type="date"
                 class="outline-none"
                 hide-details
@@ -62,21 +65,14 @@
         <v-img src="https://placehold.co/1200x400" />
       </div>
       <loading-dialog v-model="showLoader" @close="onLoadingDialogClose" />
-      <travel-cards v-if="!showBanner" @continue="showComponents = true" />
-      <!-- <v-container v-if="showComponents" class="pa-1">
-        <v-row>
-          <v-col cols="12" md="4">
-            <seat-selector @seats-selected="updateSelectedSeats" />
-          </v-col>
-          <v-col cols="12" md="4">
-            <passengers-info :selected-seats="selectedSeats" />
-          </v-col>
-          <v-col cols="12" md="4">
-            <car-details />
-          </v-col>
-        </v-row>
-        <end-buttons />
-      </v-container> -->
+      <travel-cards
+        v-if="!showBanner && travels.length"
+        :travels="travels"
+        :origin="selectedOrigin"
+        :destination="selectedDestination"
+        :date="selectedDate"
+        @continue="showComponents = true"
+      />
       <v-container v-if="showComponents" class="pa-1">
         <v-row>
           <v-col cols="12" md="4">
@@ -107,15 +103,17 @@ export default {
       showComponents: false,
       selectedSeats: [],
       userEmail: '',
+      selectedOrigin: '',
+      selectedDestination: '',
+      selectedDate: '',
+      travels: [],
       origenes: [
-        { text: 'Origen 1', value: 1 },
-        { text: 'Origen 2', value: 2 },
-        { text: 'Origen 3', value: 3 }
+        { text: 'Leon', value: 'Leon' },
+        { text: 'Ciudad de Mexico', value: 'Ciudad de Mexico' }
       ],
       destinos: [
-        { text: 'Destino 1', value: 1 },
-        { text: 'Destino 2', value: 2 },
-        { text: 'Destino 3', value: 3 }
+        { text: 'Leon', value: 'Leon' },
+        { text: 'Ciudad de Mexico', value: 'Ciudad de Mexico' }
       ]
     }
   },
@@ -125,8 +123,23 @@ export default {
     console.log('User Email:', this.userEmail)
   },
   methods: {
-    handleSearch () {
+    async handleSearch () {
       this.showLoader = true
+      try {
+        const response = await this.$axios.get('/get-travels', {
+          params: {
+            origin: this.selectedOrigin,
+            destination: this.selectedDestination,
+            date: this.selectedDate
+          }
+        })
+        this.travels = response.data
+      } catch (error) {
+        console.error('Error fetching travels:', error)
+      } finally {
+        this.showLoader = false
+        this.showBanner = false
+      }
     },
     onLoadingDialogClose () {
       this.showLoader = false

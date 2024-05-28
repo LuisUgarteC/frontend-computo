@@ -35,24 +35,24 @@
         <v-container>
           <div>
             <v-card
-              v-for="(schedule, index) in schedulesIda"
+              v-for="(travel, index) in idaTravels"
               :key="'ida-' + index"
               class="mb-6"
               :class="{ 'selected-card': selectedIda === index }"
               @click="selectCard('ida', index)"
             >
               <v-card-title>
-                {{ schedule.route }}
+                {{ travel.origin }} → {{ travel.destination }}
               </v-card-title>
               <v-card-subtitle class="mb-4">
                 <div>
                   <p>
-                    {{ schedule.date }}
+                    {{ travel.date }}
                   </p>
                 </div>
                 <div>
                   <v-chip class="rounded">
-                    {{ schedule.availableSeats }} Lugares disponibles
+                    {{ travel.availableSeats }} Lugares disponibles
                   </v-chip>
                   <span>💺</span>
                 </div>
@@ -63,10 +63,10 @@
                     PUNTO DE ENCUENTRO
                   </h3>
                   <p>
-                    {{ schedule.meetingPoint }}
+                    {{ travel.meetingPoint }}
                   </p>
                   <p>
-                    Duración: {{ schedule.duration }}
+                    Duración: {{ travel.duration }}
                   </p>
                 </div>
                 <div class="mb-4">
@@ -74,14 +74,14 @@
                     Itinerario:
                   </h3>
                   <ul>
-                    <li v-for="(item, idx) in schedule.itinerary" :key="idx">
+                    <li v-for="(item, idx) in travel.itinerary" :key="idx">
                       {{ item }}
                     </li>
                   </ul>
                 </div>
                 <div>
                   <p class="price text-right">
-                    {{ schedule.price }}
+                    {{ travel.price }}
                   </p>
                 </div>
               </v-card-text>
@@ -123,24 +123,24 @@
         <v-container>
           <div>
             <v-card
-              v-for="(schedule, index) in schedulesRegreso"
+              v-for="(travel, index) in regresoTravels"
               :key="'regreso-' + index"
               class="mb-6"
               :class="{ 'selected-card': selectedRegreso === index }"
               @click="selectCard('regreso', index)"
             >
               <v-card-title>
-                {{ schedule.route }}
+                {{ travel.origin }} → {{ travel.destination }}
               </v-card-title>
               <v-card-subtitle class="mb-4">
                 <div>
                   <p>
-                    {{ schedule.date }}
+                    {{ travel.date }}
                   </p>
                 </div>
                 <div>
                   <v-chip class="rounded">
-                    {{ schedule.availableSeats }} Lugares disponibles
+                    {{ travel.availableSeats }} Lugares disponibles
                   </v-chip>
                   <span>💺</span>
                 </div>
@@ -151,10 +151,10 @@
                     PUNTO DE ENCUENTRO
                   </h3>
                   <p>
-                    {{ schedule.meetingPoint }}
+                    {{ travel.meetingPoint }}
                   </p>
                   <p>
-                    Duración: {{ schedule.duration }}
+                    Duración: {{ travel.duration }}
                   </p>
                 </div>
                 <div class="mb-4">
@@ -162,14 +162,14 @@
                     Itinerario:
                   </h3>
                   <ul>
-                    <li v-for="(item, idx) in schedule.itinerary" :key="idx">
+                    <li v-for="(item, idx) in travel.itinerary" :key="idx">
                       {{ item }}
                     </li>
                   </ul>
                 </div>
                 <div>
                   <p class="price text-right">
-                    {{ schedule.price }}
+                    {{ travel.price }}
                   </p>
                 </div>
               </v-card-text>
@@ -193,87 +193,48 @@
 <script>
 export default {
   name: 'TravelCards',
+  props: {
+    travels: {
+      type: Array,
+      required: true
+    },
+    origin: {
+      type: String,
+      required: true
+    },
+    destination: {
+      type: String,
+      required: true
+    },
+    date: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
-      schedules: [
-        {
-          date: 'viernes, 24 de mayo',
-          route: 'CIUDAD DE MÉXICO → LEÓN',
-          participants: 3,
-          meetingPoint: 'Hotel JW Marriott frente Auditorio Nacional',
-          duration: '4:30 hrs. León',
-          itinerary: [
-            'Estacionamiento Hotel Hotsson Smart Centro Max',
-            'OxxoGas Plaza Mayor',
-            'Parque Metropolitano',
-            'OxxoGas Plaza Mayor'
-          ],
-          price: '$350.00 c/u',
-          availableSeats: 14
-        },
-        {
-          date: 'jueves, 30 de mayo',
-          route: 'LEÓN → CIUDAD DE MÉXICO',
-          participants: 3,
-          meetingPoint: 'Oxxo Gas Plaza Mayor',
-          duration: '4:45 hrs. Ciudad de México',
-          itinerary: [
-            'Tepoztlán',
-            'Hotel JW Marriott Frente Auditorio Nacional',
-            'Museo del Niño',
-            'Hotel JW Marriott Frente Auditorio Nacional'
-          ],
-          price: '$350.00 c/u',
-          availableSeats: 8
-        },
-        {
-          date: 'sabado, 25 de mayo',
-          route: 'CIUDAD DE MÉXICO → LEÓN',
-          participants: 3,
-          meetingPoint: 'Hotel JW Marriott frente Auditorio Nacional',
-          duration: '4:30 hrs. León',
-          itinerary: [
-            'Estacionamiento Hotel Hotsson Smart Centro Max',
-            'OxxoGas Plaza Mayor',
-            'Parque Metropolitano',
-            'OxxoGas Plaza Mayor'
-          ],
-          price: '$350.00 c/u',
-          availableSeats: 2
-        },
-        {
-          date: 'viernes, 31 de mayo',
-          route: 'LEÓN → CIUDAD DE MÉXICO',
-          participants: 3,
-          meetingPoint: 'Oxxo Gas Plaza Mayor',
-          duration: '4:45 hrs. Ciudad de México',
-          itinerary: [
-            'Tepoztlán',
-            'Hotel JW Marriott Frente Auditorio Nacional',
-            'Museo del Niño',
-            'Hotel JW Marriott Frente Auditorio Nacional'
-          ],
-          price: '$350.00 c/u',
-          availableSeats: 10
-        }
-      ],
       selectedIda: null,
       selectedRegreso: null,
-      formattedDate: 'viernes, 31 de mayo',
-      origin: 'LEÓN',
-      destination: 'CIUDAD DE MÉXICO'
+      formattedDate: ''
     }
   },
   computed: {
-    schedulesIda () {
-      return this.schedules.filter(schedule =>
-        schedule.route.includes('CIUDAD DE MÉXICO → LEÓN')
+    idaTravels () {
+      return this.travels.filter(travel =>
+        travel.origin === this.origin && travel.destination === this.destination && travel.date === this.date && travel.type === 'ida'
       )
     },
-    schedulesRegreso () {
-      return this.schedules.filter(schedule =>
-        schedule.route.includes('LEÓN → CIUDAD DE MÉXICO')
+    regresoTravels () {
+      return this.travels.filter(travel =>
+        travel.origin === this.destination && travel.destination === this.origin && travel.date === this.date && travel.type === 'regreso'
       )
+    }
+  },
+  watch: {
+    travels (newTravels) {
+      if (newTravels.length) {
+        this.formattedDate = this.date
+      }
     }
   },
   methods: {
