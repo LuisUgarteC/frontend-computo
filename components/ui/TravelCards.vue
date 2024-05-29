@@ -65,6 +65,16 @@
                   <p>
                     {{ travel.meetingPoint }}
                   </p>
+                  <v-row align="center" justify="start">
+                    <v-col class="d-flex py-0">
+                      <p class="mr-4 py-0">
+                        Salida: {{ travel.departureTime }}
+                      </p>
+                      <p>
+                        Llegada: {{ travel.arrivalTime }}
+                      </p>
+                    </v-col>
+                  </v-row>
                   <p>
                     Duración: {{ travel.duration }}
                   </p>
@@ -153,6 +163,16 @@
                   <p>
                     {{ travel.meetingPoint }}
                   </p>
+                  <v-row align="center" justify="start">
+                    <v-col class="d-flex py-0">
+                      <p class="mr-4 py-0">
+                        Salida: {{ travel.departureTime }}
+                      </p>
+                      <p>
+                        Llegada: {{ travel.arrivalTime }}
+                      </p>
+                    </v-col>
+                  </v-row>
                   <p>
                     Duración: {{ travel.duration }}
                   </p>
@@ -221,12 +241,12 @@ export default {
   computed: {
     idaTravels () {
       return this.travels.filter(travel =>
-        travel.origin === this.origin && travel.destination === this.destination && travel.date === this.date && travel.type === 'ida'
+        travel.routeType === `${this.origin}-${this.destination}` && travel.date === this.date && travel.type === 'ida'
       )
     },
     regresoTravels () {
       return this.travels.filter(travel =>
-        travel.origin === this.destination && travel.destination === this.origin && travel.date === this.date && travel.type === 'regreso'
+        travel.routeType === `${this.destination}-${this.origin}` && travel.date === this.date && travel.type === 'regreso'
       )
     }
   },

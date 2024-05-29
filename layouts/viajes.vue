@@ -135,6 +135,7 @@ export default {
         })
         this.travels = response.data
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error fetching travels:', error)
       } finally {
         this.showLoader = false
