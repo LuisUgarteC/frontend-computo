@@ -46,10 +46,55 @@
 
 <script>
 export default {
-  name: 'BusLayout',
+  name: 'SeatSelector',
+  props: {
+    selectedIda: {
+      type: String,
+      required: true
+    },
+    selectedRegreso: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
-      seats: [
+      seats: []
+    }
+  },
+  async mounted () {
+    await this.loadOccupiedSeats()
+  },
+  methods: {
+    toggleSeatSelection (seatId) {
+      const selectedSeats = this.seats.filter(seat => seat.selected).length
+      const seat = this.seats.find(seat => seat.id === seatId)
+      if (seat && seat.type === 'passenger') {
+        if (seat.selected) {
+          seat.selected = false
+        } else if (selectedSeats < 4) {
+          seat.selected = true
+        }
+      }
+      this.$emit('seats-selected', this.seats.filter(seat => seat.selected))
+    },
+    async loadOccupiedSeats () {
+      try {
+        const responseIda = await this.$axios.get(`/get-seats?travelId=${this.selectedIda}`)
+        const responseRegreso = await this.$axios.get(`/get-seats?travelId=${this.selectedRegreso}`)
+
+        // Combine the seats data from both responses
+        const occupiedSeatsIda = responseIda.data.seats
+        const occupiedSeatsRegreso = responseRegreso.data.seats
+
+        this.seats = this.generateSeats(occupiedSeatsIda, occupiedSeatsRegreso)
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error loading occupied seats:', error)
+      }
+    },
+    generateSeats (occupiedSeatsIda, occupiedSeatsRegreso) {
+      const seats = [
         { id: 1, label: 'Chofer', type: 'driver', selected: false, occupied: false },
         { id: 2, label: '', type: 'empty', selected: false, occupied: false },
         { id: 3, label: '', type: 'empty', selected: false, occupied: false },
@@ -75,39 +120,15 @@ export default {
         { id: 23, label: 'A16', type: 'passenger', selected: false, occupied: false },
         { id: 24, label: 'A17', type: 'passenger', selected: false, occupied: false }
       ]
-    }
-  },
-  async mounted () {
-    await this.loadOccupiedSeats()
-  },
-  methods: {
-    toggleSeatSelection (seatId) {
-      const selectedSeats = this.seats.filter(seat => seat.selected).length
-      const seat = this.seats.find(seat => seat.id === seatId)
-      if (seat && seat.type === 'passenger') {
-        if (seat.selected) {
-          seat.selected = false
-        } else if (selectedSeats < 4) {
-          seat.selected = true
+
+      seats.forEach((seat) => {
+        if (occupiedSeatsIda.some(occupiedSeat => occupiedSeat.label === seat.label) ||
+            occupiedSeatsRegreso.some(occupiedSeat => occupiedSeat.label === seat.label)) {
+          seat.occupied = true
         }
-      }
-      this.$emit('seats-selected', this.seats.filter(seat => seat.selected))
-    },
-    async loadOccupiedSeats () {
-      try {
-        const response = await this.$axios.get('/get-all-trips')
-        if (response.data.message === 'success') {
-          const occupiedSeats = response.data.trips.flatMap(trip => trip.seats)
-          this.seats.forEach((seat) => {
-            if (occupiedSeats.some(occupiedSeat => occupiedSeat.label === seat.label)) {
-              seat.occupied = true
-            }
-          })
-        }
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Error loading occupied seats:', error)
-      }
+      })
+
+      return seats
     }
   }
 }

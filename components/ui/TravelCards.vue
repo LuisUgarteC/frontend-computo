@@ -266,7 +266,11 @@ export default {
       }
     },
     continueToSeats () {
-      this.$emit('continue')
+      if (this.selectedIda !== null && this.selectedRegreso !== null) {
+        const selectedIda = this.idaTravels[this.selectedIda].id
+        const selectedRegreso = this.regresoTravels[this.selectedRegreso].id
+        this.$emit('continue', { selectedIda, selectedRegreso })
+      }
     }
   }
 }

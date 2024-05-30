@@ -25,34 +25,57 @@ export default {
     userEmail: {
       type: String,
       required: true
+    },
+    selectedIda: {
+      type: String,
+      required: true
+    },
+    selectedRegreso: {
+      type: String,
+      required: true
+    },
+    price: {
+      type: Number,
+      required: true
     }
   },
   data () {
     return {
-      price: '$650.00 MXN',
       loading: false
     }
   },
   methods: {
-    openDetails () {
-      this.$refs.travelDetailsDialog.dialog = true
-    },
     async finalizePurchase () {
       this.loading = true
       try {
         const response = await this.$axios.post('/create-trip', {
-          userEmail: this.userEmail,
-          seats: this.selectedSeats
+          seats: this.selectedSeats,
+          travelId: this.selectedIda,
+          userEmail: this.userEmail
         })
+
+        // Agregar viaje de regreso si existe selección de regreso
+        if (this.selectedRegreso) {
+          await this.$axios.post('/create-trip', {
+            seats: this.selectedSeats,
+            travelId: this.selectedRegreso,
+            userEmail: this.userEmail
+          })
+        }
+
         if (response.data.message === 'Trip created successfully') {
           this.$emit('purchase-success', response.data.trip)
         }
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error finalizing purchase:', error)
+        this.$emit('purchase-failed', error)
       } finally {
         this.loading = false
       }
+    },
+    openDetails () {
+      this.$refs.travelDetailsDialog.dialog = true // Asegurarse de abrir el diálogo correctamente
     }
   }
 }

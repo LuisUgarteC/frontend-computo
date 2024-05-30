@@ -71,12 +71,12 @@
         :origin="selectedOrigin"
         :destination="selectedDestination"
         :date="selectedDate"
-        @continue="showComponents = true"
+        @continue="showComponentsWithSeats"
       />
       <v-container v-if="showComponents" class="pa-1">
         <v-row>
           <v-col cols="12" md="4">
-            <seat-selector @seats-selected="updateSelectedSeats" />
+            <seat-selector :selected-ida="selectedIda" :selected-regreso="selectedRegreso" @seats-selected="updateSelectedSeats" />
           </v-col>
           <v-col cols="12" md="4">
             <passengers-info :selected-seats="selectedSeats" />
@@ -85,7 +85,14 @@
             <car-details />
           </v-col>
         </v-row>
-        <end-buttons :selected-seats="selectedSeats" :user-email="userEmail || ''" @purchase-success="handlePurchaseSuccess" />
+        <end-buttons
+          :selected-seats="selectedSeats"
+          :user-email="userEmail || ''"
+          :selected-ida="selectedIda"
+          :selected-regreso="selectedRegreso"
+          :price="calculatedPrice"
+          @purchase-success="handlePurchaseSuccess"
+        />
       </v-container>
       <benefits-banner />
       <info-extra />
@@ -102,10 +109,13 @@ export default {
       showBanner: true,
       showComponents: false,
       selectedSeats: [],
+      calculatedPrice: 0,
       userEmail: '',
       selectedOrigin: '',
       selectedDestination: '',
       selectedDate: '',
+      selectedIda: null,
+      selectedRegreso: null,
       travels: [],
       origenes: [
         { text: 'Leon', value: 'Leon' },
@@ -148,6 +158,20 @@ export default {
     },
     updateSelectedSeats (seats) {
       this.selectedSeats = seats
+    },
+    showComponentsWithSeats ({ selectedIda, selectedRegreso }) {
+      this.selectedIda = selectedIda
+      this.selectedRegreso = selectedRegreso
+      this.showComponents = true
+    },
+    calculateTotalPrice (selectedIda, selectedRegreso) {
+      // Lógica para calcular el precio total basado en las cards seleccionadas
+      let totalPrice = 0
+      const idaTravel = this.travels.find(travel => travel.id === selectedIda)
+      const regresoTravel = this.travels.find(travel => travel.id === selectedRegreso)
+      if (idaTravel) { totalPrice += idaTravel.price }
+      if (regresoTravel) { totalPrice += regresoTravel.price }
+      return totalPrice
     },
     handlePurchaseSuccess (trip) {
       // eslint-disable-next-line no-console

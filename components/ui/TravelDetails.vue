@@ -19,10 +19,6 @@
         <v-divider />
 
         <div v-for="(pasajero, index) in pasajeros" :key="index" class="mb-4">
-          <!-- <h3 class="text-md font-semibold">
-            {{ pasajero.email }}
-          </h3> -->
-
           <h3 class="text-md font-semibold">
             {{ pasajero.nombre }}
           </h3>
@@ -99,25 +95,27 @@
 <script>
 export default {
   name: 'TravelDetails',
-  data: () => ({
-    dialog: false,
-    pasajeros: [
-      { nombre: 'Pasajero uno', tipo: 'Adulto', price: '$350.00 MXN', asiento: 'A11' },
-      { nombre: 'Pasajero dos', tipo: 'Menor', price: '$300.00 MXN', asiento: 'A7' }
-    ],
-    total: '$650.00 MXN',
-    salida: '24 May 24',
-    duracion: '4 hrs 50 mins',
-    llegada: '24 May 24',
-    horaSalida: '11:20 PM',
-    ciudadSalida: 'Ciudad de México',
-    salidaDetalles: 'Sale de: Coapa',
-    horaLlegada: '06:10 AM',
-    ciudadLlegada: 'León',
-    llegadaDetalles: 'Llega a: Central Nueva',
-    userEmail: '',
-    userNombre: ''
-  }),
+  data () {
+    return {
+      dialog: false,
+      pasajeros: [
+        { nombre: 'Pasajero uno', tipo: 'Adulto', price: '$350.00 MXN', asiento: 'A11' },
+        { nombre: 'Pasajero dos', tipo: 'Menor', price: '$300.00 MXN', asiento: 'A7' }
+      ],
+      total: '$650.00 MXN',
+      salida: '24 May 24',
+      duracion: '4 hrs 50 mins',
+      llegada: '24 May 24',
+      horaSalida: '11:20 PM',
+      ciudadSalida: 'Ciudad de México',
+      salidaDetalles: 'Sale de: Coapa',
+      horaLlegada: '06:10 AM',
+      ciudadLlegada: 'León',
+      llegadaDetalles: 'Llega a: Central Nueva',
+      userEmail: '',
+      userNombre: ''
+    }
+  },
   mounted () {
     this.fetchUserEmail()
     this.fetchUserNombre()
