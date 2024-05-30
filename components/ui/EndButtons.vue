@@ -6,7 +6,7 @@
       </v-icon>
     </v-btn>
     <v-btn class="red darken-4 white--text" :loading="loading" @click="finalizePurchase">
-      {{ loading ? 'Procesando...' : 'Comprar por ' + price }}
+      {{ loading ? 'Procesando...' : 'Comprar por $' + price }}
       <v-icon class="ml-1">
         mdi-cash-check
       </v-icon>
@@ -16,7 +16,12 @@
 </template>
 
 <script>
+import TravelDetails from './TravelDetails.vue'
+
 export default {
+  components: {
+    TravelDetails
+  },
   props: {
     selectedSeats: {
       type: Array,
@@ -75,7 +80,7 @@ export default {
       }
     },
     openDetails () {
-      this.$refs.travelDetailsDialog.dialog = true // Asegurarse de abrir el diálogo correctamente
+      this.$refs.travelDetailsDialog.dialog = true
     }
   }
 }

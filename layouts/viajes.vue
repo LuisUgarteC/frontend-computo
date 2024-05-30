@@ -158,6 +158,7 @@ export default {
     },
     updateSelectedSeats (seats) {
       this.selectedSeats = seats
+      this.calculateTotalPrice()
     },
     showComponentsWithSeats ({ selectedIda, selectedRegreso }) {
       this.selectedIda = selectedIda
@@ -167,15 +168,17 @@ export default {
       this.showComponents = false
       this.$nextTick(() => {
         this.showComponents = true
+        this.calculateTotalPrice()
       })
     },
-    calculateTotalPrice (selectedIda, selectedRegreso) {
+    calculateTotalPrice () {
       let totalPrice = 0
-      const idaTravel = this.travels.find(travel => travel.id === selectedIda)
-      const regresoTravel = this.travels.find(travel => travel.id === selectedRegreso)
-      if (idaTravel) { totalPrice += idaTravel.price }
-      if (regresoTravel) { totalPrice += regresoTravel.price }
-      return totalPrice
+      const pricePerSeat = 350 // Assuming 350 is the price per seat by default
+      const priceForMinor = 200 // Assuming 200 is the price for minors
+      this.selectedSeats.forEach((seat) => {
+        totalPrice += seat.passengerType === 'Menor' ? priceForMinor : pricePerSeat
+      })
+      this.calculatedPrice = totalPrice
     },
     handlePurchaseSuccess (trip) {
       // eslint-disable-next-line no-console
