@@ -76,7 +76,7 @@
       <v-container v-if="showComponents" class="pa-1">
         <v-row>
           <v-col cols="12" md="4">
-            <seat-selector :selected-ida="selectedIda" :selected-regreso="selectedRegreso" @seats-selected="updateSelectedSeats" />
+            <seat-selector :key="selectedIda + selectedRegreso" :selected-ida="selectedIda" :selected-regreso="selectedRegreso" @seats-selected="updateSelectedSeats" />
           </v-col>
           <v-col cols="12" md="4">
             <passengers-info :selected-seats="selectedSeats" />
@@ -162,10 +162,14 @@ export default {
     showComponentsWithSeats ({ selectedIda, selectedRegreso }) {
       this.selectedIda = selectedIda
       this.selectedRegreso = selectedRegreso
-      this.showComponents = true
+      this.calculatedPrice = this.calculateTotalPrice(selectedIda, selectedRegreso)
+      this.selectedSeats = []
+      this.showComponents = false
+      this.$nextTick(() => {
+        this.showComponents = true
+      })
     },
     calculateTotalPrice (selectedIda, selectedRegreso) {
-      // Lógica para calcular el precio total basado en las cards seleccionadas
       let totalPrice = 0
       const idaTravel = this.travels.find(travel => travel.id === selectedIda)
       const regresoTravel = this.travels.find(travel => travel.id === selectedRegreso)
