@@ -41,7 +41,7 @@
                       placeholder="Ej: Juan Pérez"
                       outlined
                       dense
-                      @input="emitPassengerInfo"
+                      @input="updatePassengerInfo"
                     />
                   </v-col>
                   <v-col cols="12">
@@ -51,7 +51,7 @@
                       :items="['Adulto', 'Menor']"
                       outlined
                       dense
-                      @change="emitPassengerInfo"
+                      @change="updatePassengerInfo"
                     />
                   </v-col>
                 </v-row>
@@ -73,7 +73,10 @@ export default {
     }
   },
   methods: {
-    emitPassengerInfo () {
+    updatePassengerInfo () {
+      this.selectedSeats.forEach((seat) => {
+        seat.price = seat.passengerType === 'Menor' ? 200 : 350
+      })
       this.$emit('update-passenger-info', this.selectedSeats)
     }
   }
@@ -82,7 +85,7 @@ export default {
 
 <style>
 .caption {
-  font-size: 12px;
+  font-size: 12px; /* Tamaño del texto más pequeño */
 }
 .text-zinc-800 {
   color: #374151;

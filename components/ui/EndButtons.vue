@@ -6,12 +6,12 @@
       </v-icon>
     </v-btn>
     <v-btn class="red darken-4 white--text" :loading="loading" @click="finalizePurchase">
-      {{ loading ? 'Procesando...' : 'Comprar por $' + price }}
+      {{ loading ? 'Procesando...' : 'Comprar por ' + formatCurrency(total) }}
       <v-icon class="ml-1">
         mdi-cash-check
       </v-icon>
     </v-btn>
-    <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" /> <!-- Asegúrate de pasar la prop aquí -->
+    <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" />
   </div>
 </template>
 
@@ -51,7 +51,14 @@ export default {
   },
   data () {
     return {
-      loading: false
+      loading: false,
+      total: 0
+    }
+  },
+  watch: {
+    passengerInfo: {
+      handler: 'calculateTotal',
+      deep: true
     }
   },
   methods: {
@@ -86,6 +93,12 @@ export default {
     },
     openDetails () {
       this.$refs.travelDetailsDialog.dialog = true
+    },
+    calculateTotal () {
+      this.total = this.passengerInfo.reduce((sum, pasajero) => sum + pasajero.price, 0)
+    },
+    formatCurrency (amount) {
+      return `$${amount.toFixed(2).toLocaleString()}`
     }
   }
 }

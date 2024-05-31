@@ -29,6 +29,9 @@
             <p class="grey--text" style="margin-top: -10px;">
               {{ pasajero.label }}
             </p>
+            <div class="d-flex justify-end grey--text text-lg font-semibold">
+              {{ formatCurrency(pasajero.price) }}
+            </div>
           </div>
           <v-divider v-if="index !== passengerInfo.length - 1" />
         </div>
@@ -39,8 +42,8 @@
           <h2 class="text-lg font-semibold">
             Total
           </h2>
-          <div class="d-flex justify-end red--text text-lg font-semibold">
-            {{ total }}
+          <div class="d-flex justify-end red--text text-lg font-semibold total-amount">
+            {{ formatCurrency(total) }}
           </div>
         </div>
 
@@ -101,7 +104,7 @@ export default {
   data () {
     return {
       dialog: false,
-      total: '$650.00 MXN',
+      total: 0,
       salida: '24 May 24',
       duracion: '4 hrs 50 mins',
       llegada: '24 May 24',
@@ -113,6 +116,12 @@ export default {
       llegadaDetalles: 'Llega a: Central Nueva',
       userEmail: '',
       userNombre: ''
+    }
+  },
+  watch: {
+    passengerInfo: {
+      handler: 'calculateTotal',
+      deep: true
     }
   },
   mounted () {
@@ -127,7 +136,20 @@ export default {
     fetchUserNombre () {
       const nombre = localStorage.getItem('userNombre')
       this.userNombre = nombre || 'ERROR 2'
+    },
+    calculateTotal () {
+      this.total = this.passengerInfo.reduce((sum, pasajero) => sum + pasajero.price, 0)
+    },
+    formatCurrency (amount) {
+      return `$${amount.toFixed(2).toLocaleString()}`
     }
   }
 }
 </script>
+
+<style scoped>
+.total-amount {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+</style>
