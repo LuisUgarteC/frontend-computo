@@ -11,7 +11,7 @@
         mdi-cash-check
       </v-icon>
     </v-btn>
-    <travel-details ref="travelDetailsDialog" />
+    <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" /> <!-- Asegúrate de pasar la prop aquí -->
   </div>
 </template>
 
@@ -42,6 +42,11 @@ export default {
     price: {
       type: Number,
       required: true
+    },
+    passengerInfo: {
+      type: Array,
+      required: true,
+      default: () => []
     }
   },
   data () {

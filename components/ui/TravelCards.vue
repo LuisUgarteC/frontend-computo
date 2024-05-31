@@ -205,7 +205,7 @@
           mdi-seat
         </v-icon>
       </v-btn>
-      <travel-details ref="travelDetailsDialog" />
+      <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" />
     </div>
   </v-container>
 </template>
@@ -228,6 +228,10 @@ export default {
     },
     date: {
       type: String,
+      required: true
+    },
+    passengerInfo: {
+      type: Array,
       required: true
     }
   },

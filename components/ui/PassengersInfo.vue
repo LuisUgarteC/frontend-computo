@@ -41,6 +41,7 @@
                       placeholder="Ej: Juan Pérez"
                       outlined
                       dense
+                      @input="emitPassengerInfo"
                     />
                   </v-col>
                   <v-col cols="12">
@@ -50,6 +51,7 @@
                       :items="['Adulto', 'Menor']"
                       outlined
                       dense
+                      @change="emitPassengerInfo"
                     />
                   </v-col>
                 </v-row>
@@ -69,13 +71,18 @@ export default {
       type: Array,
       required: true
     }
+  },
+  methods: {
+    emitPassengerInfo () {
+      this.$emit('update-passenger-info', this.selectedSeats)
+    }
   }
 }
 </script>
 
 <style>
 .caption {
-  font-size: 12px; /* Tamaño del texto más pequeño */
+  font-size: 12px;
 }
 .text-zinc-800 {
   color: #374151;

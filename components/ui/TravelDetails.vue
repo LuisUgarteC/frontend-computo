@@ -18,22 +18,19 @@
         </div>
         <v-divider />
 
-        <div v-for="(pasajero, index) in pasajeros" :key="index" class="mb-4">
+        <div v-for="(pasajero, index) in passengerInfo" :key="index" class="mb-4">
           <h3 class="text-md font-semibold">
-            {{ pasajero.nombre }}
+            {{ pasajero.passengerName }}
           </h3>
           <div class="d-flex flex-column">
             <p class="grey--text mb-2">
-              {{ pasajero.tipo }}
+              {{ pasajero.passengerType }}
             </p>
             <p class="grey--text" style="margin-top: -10px;">
-              {{ pasajero.asiento }}
+              {{ pasajero.label }}
             </p>
           </div>
-          <div class="d-flex justify-end grey--text text-lg font-semibold">
-            {{ pasajero.price }}
-          </div>
-          <v-divider v-if="index !== pasajeros.length - 1" />
+          <v-divider v-if="index !== passengerInfo.length - 1" />
         </div>
 
         <v-divider />
@@ -95,13 +92,15 @@
 <script>
 export default {
   name: 'TravelDetails',
+  props: {
+    passengerInfo: {
+      type: Array,
+      required: true
+    }
+  },
   data () {
     return {
       dialog: false,
-      pasajeros: [
-        { nombre: 'Pasajero uno', tipo: 'Adulto', price: '$350.00 MXN', asiento: 'A11' },
-        { nombre: 'Pasajero dos', tipo: 'Menor', price: '$300.00 MXN', asiento: 'A7' }
-      ],
       total: '$650.00 MXN',
       salida: '24 May 24',
       duracion: '4 hrs 50 mins',

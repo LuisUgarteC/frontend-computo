@@ -71,6 +71,7 @@
         :origin="selectedOrigin"
         :destination="selectedDestination"
         :date="selectedDate"
+        :passenger-info="passengerInfo"
         @continue="showComponentsWithSeats"
       />
       <v-container v-if="showComponents" class="pa-1">
@@ -79,7 +80,7 @@
             <seat-selector :key="selectedIda + selectedRegreso" :selected-ida="selectedIda" :selected-regreso="selectedRegreso" @seats-selected="updateSelectedSeats" />
           </v-col>
           <v-col cols="12" md="4">
-            <passengers-info :selected-seats="selectedSeats" />
+            <passengers-info :selected-seats="selectedSeats" @update-passenger-info="handleUpdatePassengerInfo" />
           </v-col>
           <v-col cols="12" md="4">
             <car-details />
@@ -91,6 +92,7 @@
           :selected-ida="selectedIda"
           :selected-regreso="selectedRegreso"
           :price="calculatedPrice"
+          :passenger-info="passengerInfo"
           @purchase-success="handlePurchaseSuccess"
         />
       </v-container>
@@ -117,6 +119,7 @@ export default {
       selectedIda: null,
       selectedRegreso: null,
       travels: [],
+      passengerInfo: [], // Inicializa como un array vacío
       origenes: [
         { text: 'Leon', value: 'Leon' },
         { text: 'Ciudad de Mexico', value: 'Ciudad de Mexico' }
@@ -133,6 +136,9 @@ export default {
     console.log('User Email:', this.userEmail)
   },
   methods: {
+    handleUpdatePassengerInfo (updatedPassengerInfo) {
+      this.passengerInfo = updatedPassengerInfo
+    },
     async handleSearch () {
       this.showLoader = true
       try {
@@ -173,8 +179,8 @@ export default {
     },
     calculateTotalPrice () {
       let totalPrice = 0
-      const pricePerSeat = 350 // Assuming 350 is the price per seat by default
-      const priceForMinor = 200 // Assuming 200 is the price for minors
+      const pricePerSeat = 350
+      const priceForMinor = 200
       this.selectedSeats.forEach((seat) => {
         totalPrice += seat.passengerType === 'Menor' ? priceForMinor : pricePerSeat
       })
