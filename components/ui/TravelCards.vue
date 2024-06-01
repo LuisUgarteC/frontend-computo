@@ -7,11 +7,6 @@
           <div class="p-2 text-center">
             SELECCIONA TU HORARIO DE IDA
           </div>
-          <div class="mt-4 text-center">
-            <p>
-              Fecha de salida: {{ formattedDate }}
-            </p>
-          </div>
           <v-row class="flex items-center justify-center mt-4">
             <v-col cols="auto">
               <div class="text-center">
@@ -39,7 +34,7 @@
               :key="'ida-' + index"
               class="mb-6"
               :class="{ 'selected-card': selectedIda === index }"
-              @click="selectCard('ida', index)"
+              @click="selectCard('ida', index, travel.date)"
             >
               <v-card-title>
                 {{ travel.origin }} → {{ travel.destination }}
@@ -105,11 +100,6 @@
           <div class="p-2 text-center">
             SELECCIONA TU HORARIO DE REGRESO
           </div>
-          <div class="mt-4 text-center">
-            <p>
-              Fecha de regreso: {{ formattedReturnDate }}
-            </p>
-          </div>
           <v-row class="flex items-center justify-center mt-4">
             <v-col cols="auto">
               <div class="text-center">
@@ -137,7 +127,7 @@
               :key="'regreso-' + index"
               class="mb-6"
               :class="{ 'selected-card': selectedRegreso === index }"
-              @click="selectCard('regreso', index)"
+              @click="selectCard('regreso', index, travel.date)"
             >
               <v-card-title>
                 {{ travel.origin }} → {{ travel.destination }}
@@ -205,7 +195,7 @@
           mdi-seat
         </v-icon>
       </v-btn>
-      <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" />
+      <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" :salida="selectedIdaDate" :regreso="selectedRegresoDate" />
     </div>
   </v-container>
 </template>
@@ -239,6 +229,8 @@ export default {
     return {
       selectedIda: null,
       selectedRegreso: null,
+      selectedIdaDate: '',
+      selectedRegresoDate: '',
       formattedDate: '',
       formattedReturnDate: ''
     }
@@ -264,11 +256,13 @@ export default {
     }
   },
   methods: {
-    selectCard (type, index) {
+    selectCard (type, index, date) {
       if (type === 'ida') {
         this.selectedIda = index
+        this.selectedIdaDate = date
       } else if (type === 'regreso') {
         this.selectedRegreso = index
+        this.selectedRegresoDate = this.incrementDate(date, 2)
       }
     },
     continueToSeats () {
@@ -285,7 +279,6 @@ export default {
     },
     formatDate (date) {
       const options = { year: 'numeric', month: 'long', day: 'numeric' }
-      // Ajuste de zona horaria para asegurarse de que la fecha sea correcta
       const utcDate = new Date(date)
       return new Date(utcDate.getTime() + utcDate.getTimezoneOffset() * 60000).toLocaleDateString('es-ES', options)
     }

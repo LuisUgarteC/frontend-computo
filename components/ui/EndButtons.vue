@@ -11,7 +11,7 @@
         mdi-cash-check
       </v-icon>
     </v-btn>
-    <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" />
+    <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" :salida="selectedIdaDate" :regreso="selectedRegresoDate" />
   </div>
 </template>
 
@@ -36,6 +36,14 @@ export default {
       required: true
     },
     selectedRegreso: {
+      type: String,
+      required: true
+    },
+    selectedIdaDate: {
+      type: String,
+      required: true
+    },
+    selectedRegresoDate: {
       type: String,
       required: true
     },
@@ -71,7 +79,6 @@ export default {
           userEmail: this.userEmail
         })
 
-        // Agregar viaje de regreso si existe selección de regreso
         if (this.selectedRegreso) {
           await this.$axios.post('/create-trip', {
             seats: this.selectedSeats,

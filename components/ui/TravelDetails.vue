@@ -51,9 +51,9 @@
 
         <div class="py-4">
           <div class="d-flex justify-space-between grey--text">
-            <span>Sale: <strong class="black--text">{{ salida }}</strong></span>
+            <span>Sale: <strong class="black--text">{{ formatTravelDate(salida) }}</strong></span>
             <span>{{ duracion }}</span>
-            <span>Llega: <strong class="black--text">{{ llegada }}</strong></span>
+            <span>Regreso: <strong class="black--text">{{ formatTravelDate(regreso) }}</strong></span>
           </div>
         </div>
 
@@ -99,15 +99,21 @@ export default {
     passengerInfo: {
       type: Array,
       required: true
+    },
+    salida: {
+      type: String,
+      required: true
+    },
+    regreso: {
+      type: String,
+      required: true
     }
   },
   data () {
     return {
       dialog: false,
       total: 0,
-      salida: '24 May 24',
-      duracion: '4 hrs 50 mins',
-      llegada: '24 May 24',
+      duracion: '2 Días',
       horaSalida: '11:20 PM',
       ciudadSalida: 'Ciudad de México',
       salidaDetalles: 'Sale de: Coapa',
@@ -142,6 +148,11 @@ export default {
     },
     formatCurrency (amount) {
       return `$${amount.toFixed(2).toLocaleString()}`
+    },
+    formatTravelDate (date) {
+      const options = { day: '2-digit', month: 'short', year: '2-digit' }
+      const utcDate = new Date(date)
+      return new Date(utcDate.getTime() + (utcDate.getTimezoneOffset() * 60000)).toLocaleDateString('es-ES', options)
     }
   }
 }

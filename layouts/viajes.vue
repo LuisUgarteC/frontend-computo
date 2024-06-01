@@ -91,6 +91,8 @@
           :user-email="userEmail || ''"
           :selected-ida="selectedIda"
           :selected-regreso="selectedRegreso"
+          :selected-ida-date="selectedDate || ''"
+          :selected-regreso-date="incrementDate(selectedDate, 2) || ''"
           :price="calculatedPrice"
           :passenger-info="passengerInfo"
           @purchase-success="handlePurchaseSuccess"
@@ -119,7 +121,7 @@ export default {
       selectedIda: null,
       selectedRegreso: null,
       travels: [],
-      passengerInfo: [], // Inicializa como un array vacío
+      passengerInfo: [],
       origenes: [
         { text: 'Leon', value: 'Leon' },
         { text: 'Ciudad de Mexico', value: 'Ciudad de Mexico' }
@@ -185,6 +187,11 @@ export default {
         totalPrice += seat.passengerType === 'Menor' ? priceForMinor : pricePerSeat
       })
       this.calculatedPrice = totalPrice
+    },
+    incrementDate (date, days) {
+      const result = new Date(date)
+      result.setDate(result.getDate() + days)
+      return result.toISOString().split('T')[0]
     },
     handlePurchaseSuccess (trip) {
       // eslint-disable-next-line no-console
