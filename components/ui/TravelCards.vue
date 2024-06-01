@@ -9,7 +9,7 @@
           </div>
           <div class="mt-4 text-center">
             <p>
-              {{ formattedDate }}
+              Fecha de salida: {{ formattedDate }}
             </p>
           </div>
           <v-row class="flex items-center justify-center mt-4">
@@ -47,7 +47,7 @@
               <v-card-subtitle class="mb-4">
                 <div>
                   <p>
-                    {{ travel.date }}
+                    Fecha de salida: {{ formatDate(travel.date) }}
                   </p>
                 </div>
                 <div>
@@ -107,7 +107,7 @@
           </div>
           <div class="mt-4 text-center">
             <p>
-              {{ formattedDate }}
+              Fecha de regreso: {{ formattedReturnDate }}
             </p>
           </div>
           <v-row class="flex items-center justify-center mt-4">
@@ -145,7 +145,7 @@
               <v-card-subtitle class="mb-4">
                 <div>
                   <p>
-                    {{ travel.date }}
+                    Fecha de regreso: {{ formatDate(incrementDate(travel.date, 2)) }}
                   </p>
                 </div>
                 <div>
@@ -239,7 +239,8 @@ export default {
     return {
       selectedIda: null,
       selectedRegreso: null,
-      formattedDate: ''
+      formattedDate: '',
+      formattedReturnDate: ''
     }
   },
   computed: {
@@ -257,7 +258,8 @@ export default {
   watch: {
     travels (newTravels) {
       if (newTravels.length) {
-        this.formattedDate = this.date
+        this.formattedDate = this.formatDate(this.date)
+        this.formattedReturnDate = this.formatDate(this.incrementDate(this.date, 2))
       }
     }
   },
@@ -275,6 +277,17 @@ export default {
         const selectedRegreso = this.regresoTravels[this.selectedRegreso].id
         this.$emit('continue', { selectedIda, selectedRegreso })
       }
+    },
+    incrementDate (date, days) {
+      const result = new Date(date)
+      result.setDate(result.getDate() + days)
+      return result.toISOString().split('T')[0]
+    },
+    formatDate (date) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' }
+      // Ajuste de zona horaria para asegurarse de que la fecha sea correcta
+      const utcDate = new Date(date)
+      return new Date(utcDate.getTime() + utcDate.getTimezoneOffset() * 60000).toLocaleDateString('es-ES', options)
     }
   }
 }
