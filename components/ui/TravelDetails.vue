@@ -51,37 +51,55 @@
 
         <div class="py-4">
           <div class="d-flex justify-space-between grey--text">
-            <span>Sale: <strong class="black--text">{{ formatTravelDate(salida) }}</strong></span>
+            <span>Sale: <strong class="black--text">{{ formatTravelDate(salidaDate.date) }}</strong></span>
             <span>{{ duracion }}</span>
-            <span>Regreso: <strong class="black--text">{{ formatTravelDate(regreso) }}</strong></span>
+            <span>Regreso: <strong class="black--text">{{ formatTravelDate(regresoDate.date) }}</strong></span>
           </div>
         </div>
 
         <v-divider />
 
         <div class="py-4">
-          <div class="d-flex align-center mb-2">
-            <span class="text-lg font-semibold">{{ horaSalida }}</span>
-            <div class="d-flex align-center ml-4">
-              <div>
-                <div class="text-lg font-semibold">
-                  {{ ciudadSalida }}
+          <div class="d-flex justify-space-between grey--text">
+            <div class="d-flex align-center">
+              <span class="text-lg font-semibold">{{ salidaDate.departureTime }}</span>
+              <div class="d-flex align-center ml-4">
+                <div>
+                  <div class="text-lg font-semibold">
+                    {{ salidaDate.origin }}
+                  </div>
                 </div>
-                <div class="grey--text">
-                  {{ salidaDetalles }}
+              </div>
+            </div>
+            <div class="d-flex align-center">
+              <span class="text-lg font-semibold">{{ regresoDate.departureTime }}</span>
+              <div class="d-flex align-center ml-4">
+                <div>
+                  <div class="text-lg font-semibold">
+                    {{ regresoDate.origin }}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="d-flex align-center">
-            <span class="text-lg font-semibold">{{ horaLlegada }}</span>
-            <div class="d-flex align-center ml-4">
-              <div>
-                <div class="text-lg font-semibold">
-                  {{ ciudadLlegada }}
+          <div class="d-flex justify-space-between grey--text">
+            <div class="d-flex align-center">
+              <span class="text-lg font-semibold">{{ salidaDate.arrivalTime }}</span>
+              <div class="d-flex align-center ml-4">
+                <div>
+                  <div class="text-lg font-semibold">
+                    {{ salidaDate.destination }}
+                  </div>
                 </div>
-                <div class="grey--text">
-                  {{ llegadaDetalles }}
+              </div>
+            </div>
+            <div class="d-flex align-center">
+              <span class="text-lg font-semibold">{{ regresoDate.arrivalTime }}</span>
+              <div class="d-flex align-center ml-4">
+                <div>
+                  <div class="text-lg font-semibold">
+                    {{ regresoDate.destination }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -100,12 +118,12 @@ export default {
       type: Array,
       required: true
     },
-    salida: {
-      type: String,
+    salidaDate: {
+      type: Object,
       required: true
     },
-    regreso: {
-      type: String,
+    regresoDate: {
+      type: Object,
       required: true
     }
   },
@@ -114,12 +132,6 @@ export default {
       dialog: false,
       total: 0,
       duracion: '2 Días',
-      horaSalida: '11:20 PM',
-      ciudadSalida: 'Ciudad de México',
-      salidaDetalles: 'Sale de: Coapa',
-      horaLlegada: '06:10 AM',
-      ciudadLlegada: 'León',
-      llegadaDetalles: 'Llega a: Central Nueva',
       userEmail: '',
       userNombre: ''
     }
@@ -150,9 +162,9 @@ export default {
       return `$${amount.toFixed(2).toLocaleString()}`
     },
     formatTravelDate (date) {
-      const options = { day: '2-digit', month: 'short', year: '2-digit' }
+      const options = { year: '2-digit', month: 'short', day: '2-digit' }
       const utcDate = new Date(date)
-      return new Date(utcDate.getTime() + (utcDate.getTimezoneOffset() * 60000)).toLocaleDateString('es-ES', options)
+      return new Date(utcDate.getTime() + utcDate.getTimezoneOffset() * 60000).toLocaleDateString('es-ES', options)
     }
   }
 }

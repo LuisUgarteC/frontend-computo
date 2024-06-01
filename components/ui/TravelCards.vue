@@ -34,7 +34,7 @@
               :key="'ida-' + index"
               class="mb-6"
               :class="{ 'selected-card': selectedIda === index }"
-              @click="selectCard('ida', index, travel.date)"
+              @click="selectCard('ida', index, travel)"
             >
               <v-card-title>
                 {{ travel.origin }} → {{ travel.destination }}
@@ -127,7 +127,7 @@
               :key="'regreso-' + index"
               class="mb-6"
               :class="{ 'selected-card': selectedRegreso === index }"
-              @click="selectCard('regreso', index, travel.date)"
+              @click="selectCard('regreso', index, travel)"
             >
               <v-card-title>
                 {{ travel.origin }} → {{ travel.destination }}
@@ -195,7 +195,7 @@
           mdi-seat
         </v-icon>
       </v-btn>
-      <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" :salida="selectedIdaDate" :regreso="selectedRegresoDate" />
+      <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" :salida-date="selectedIdaDetails" :regreso-date="selectedRegresoDetails" />
     </div>
   </v-container>
 </template>
@@ -229,8 +229,8 @@ export default {
     return {
       selectedIda: null,
       selectedRegreso: null,
-      selectedIdaDate: '',
-      selectedRegresoDate: '',
+      selectedIdaDetails: {},
+      selectedRegresoDetails: {},
       formattedDate: '',
       formattedReturnDate: ''
     }
@@ -256,13 +256,16 @@ export default {
     }
   },
   methods: {
-    selectCard (type, index, date) {
+    selectCard (type, index, travel) {
       if (type === 'ida') {
         this.selectedIda = index
-        this.selectedIdaDate = date
+        this.selectedIdaDetails = travel
       } else if (type === 'regreso') {
         this.selectedRegreso = index
-        this.selectedRegresoDate = this.incrementDate(date, 2)
+        this.selectedRegresoDetails = {
+          ...travel,
+          date: this.incrementDate(travel.date, 2)
+        }
       }
     },
     continueToSeats () {

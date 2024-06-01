@@ -49,11 +49,11 @@ export default {
   name: 'SeatSelector',
   props: {
     selectedIda: {
-      type: String,
+      type: Object,
       required: true
     },
     selectedRegreso: {
-      type: String,
+      type: Object,
       required: true
     }
   },
@@ -80,8 +80,8 @@ export default {
     },
     async loadOccupiedSeats () {
       try {
-        const responseIda = await this.$axios.get(`/get-seats?travelId=${this.selectedIda}`)
-        const responseRegreso = await this.$axios.get(`/get-seats?travelId=${this.selectedRegreso}`)
+        const responseIda = await this.$axios.get(`/get-seats?travelId=${this.selectedIda.id}`)
+        const responseRegreso = await this.$axios.get(`/get-seats?travelId=${this.selectedRegreso.id}`)
 
         // Combine the seats data from both responses
         const occupiedSeatsIda = responseIda.data.seats

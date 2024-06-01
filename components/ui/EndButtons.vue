@@ -11,7 +11,7 @@
         mdi-cash-check
       </v-icon>
     </v-btn>
-    <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" :salida="selectedIdaDate" :regreso="selectedRegresoDate" />
+    <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" :salida-date="selectedIda" :regreso-date="selectedRegreso" />
   </div>
 </template>
 
@@ -32,19 +32,11 @@ export default {
       required: true
     },
     selectedIda: {
-      type: String,
+      type: Object,
       required: true
     },
     selectedRegreso: {
-      type: String,
-      required: true
-    },
-    selectedIdaDate: {
-      type: String,
-      required: true
-    },
-    selectedRegresoDate: {
-      type: String,
+      type: Object,
       required: true
     },
     price: {
@@ -75,14 +67,14 @@ export default {
       try {
         const response = await this.$axios.post('/create-trip', {
           seats: this.selectedSeats,
-          travelId: this.selectedIda,
+          travelId: this.selectedIda.id,
           userEmail: this.userEmail
         })
 
         if (this.selectedRegreso) {
           await this.$axios.post('/create-trip', {
             seats: this.selectedSeats,
-            travelId: this.selectedRegreso,
+            travelId: this.selectedRegreso.id,
             userEmail: this.userEmail
           })
         }

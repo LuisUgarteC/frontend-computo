@@ -77,7 +77,7 @@
       <v-container v-if="showComponents" class="pa-1">
         <v-row>
           <v-col cols="12" md="4">
-            <seat-selector :key="selectedIda + selectedRegreso" :selected-ida="selectedIda" :selected-regreso="selectedRegreso" @seats-selected="updateSelectedSeats" />
+            <seat-selector :key="selectedIda + selectedRegreso" :selected-ida="selectedIdaDetails" :selected-regreso="selectedRegresoDetails" @seats-selected="updateSelectedSeats" />
           </v-col>
           <v-col cols="12" md="4">
             <passengers-info :selected-seats="selectedSeats" @update-passenger-info="handleUpdatePassengerInfo" />
@@ -89,10 +89,8 @@
         <end-buttons
           :selected-seats="selectedSeats"
           :user-email="userEmail || ''"
-          :selected-ida="selectedIda"
-          :selected-regreso="selectedRegreso"
-          :selected-ida-date="selectedDate || ''"
-          :selected-regreso-date="incrementDate(selectedDate, 2) || ''"
+          :selected-ida="selectedIdaDetails"
+          :selected-regreso="selectedRegresoDetails"
           :price="calculatedPrice"
           :passenger-info="passengerInfo"
           @purchase-success="handlePurchaseSuccess"
@@ -120,6 +118,8 @@ export default {
       selectedDate: '',
       selectedIda: null,
       selectedRegreso: null,
+      selectedIdaDetails: {},
+      selectedRegresoDetails: {},
       travels: [],
       passengerInfo: [],
       origenes: [
@@ -171,7 +171,12 @@ export default {
     showComponentsWithSeats ({ selectedIda, selectedRegreso }) {
       this.selectedIda = selectedIda
       this.selectedRegreso = selectedRegreso
-      this.calculatedPrice = this.calculateTotalPrice(selectedIda, selectedRegreso)
+      this.selectedIdaDetails = this.travels.find(travel => travel.id === selectedIda)
+      this.selectedRegresoDetails = {
+        ...this.travels.find(travel => travel.id === selectedRegreso),
+        date: this.incrementDate(this.selectedDate, 2)
+      }
+      this.calculatedPrice = this.calculateTotalPrice()
       this.selectedSeats = []
       this.showComponents = false
       this.$nextTick(() => {
