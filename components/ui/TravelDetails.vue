@@ -1,19 +1,20 @@
 <template>
   <v-dialog v-model="dialog" max-width="600">
-    <v-card>
+    <v-card ref="detailsCard">
       <v-card-title class="red darken-3 white--text d-flex justify-space-between align-center" style="position: sticky; top: 0; z-index: 1;">
         <span>Detalles del viaje</span>
+        <v-btn class="transparent white--text" small text @click="printDetails">
+          Imprimir
+        </v-btn>
         <v-btn class="transparent white--text" small text @click="dialog = false">
           Listo
         </v-btn>
       </v-card-title>
 
-      <v-card-text>
+      <v-card-text ref="details">
         <v-divider />
         <div style="padding-top: 20px">
-          <strong>
-            {{ userEmail }}
-          </strong>
+          <strong>{{ userEmail }}</strong>
           {{ userNombre }}
         </div>
         <v-divider />
@@ -111,6 +112,9 @@
 </template>
 
 <script>
+import JsPDF from 'jspdf'
+import Html2canvas from 'html2canvas'
+
 export default {
   name: 'TravelDetails',
   props: {
@@ -165,6 +169,31 @@ export default {
       const options = { year: '2-digit', month: 'short', day: '2-digit' }
       const utcDate = new Date(date)
       return new Date(utcDate.getTime() + utcDate.getTimezoneOffset() * 60000).toLocaleDateString('es-ES', options)
+    },
+    async printDetails () {
+      const doc = new JsPDF()
+      const details = this.$refs.details
+      const canvas = await Html2canvas(details, { scale: 4 })
+
+      const imgData = canvas.toDataURL('image/png')
+      const imgWidth = 210
+      const imgHeight = canvas.height * imgWidth / canvas.width
+
+      // Añadir un logo o cualquier otro elemento
+      const logoUrl = require('@/assets/img/seat-occupied.png') // cambiar
+      const logoWidth = 15
+      const logoHeight = 15
+
+      // Añadir logo al PDF
+      doc.addImage(logoUrl, 'PNG', 35, 10, logoWidth, logoHeight)
+
+      doc.setFontSize(12)
+      doc.text('Gracias por tu compra', 100, 30) // cambiar
+
+      // Añadir la imagen del contenido del componente
+      doc.addImage(imgData, 'PNG', 35, 35, imgWidth / 1.5, imgHeight / 1.5)
+
+      window.open(doc.output('bloburl'))
     }
   }
 }
