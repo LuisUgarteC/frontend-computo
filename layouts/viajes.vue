@@ -96,6 +96,7 @@
           @purchase-success="handlePurchaseSuccess"
         />
       </v-container>
+      <payment-success />
       <benefits-banner />
       <info-extra />
       <info-footer />
