@@ -17,6 +17,7 @@
                 class="outline-none"
                 hide-details
                 dense
+                style="width: 150px;"
               />
             </div>
           </v-col>
@@ -34,6 +35,7 @@
                 class="outline-none"
                 hide-details
                 dense
+                style="width: 150px;"
               />
             </div>
           </v-col>
@@ -47,6 +49,7 @@
                 class="outline-none"
                 hide-details
                 dense
+                style="width: 150px;"
               />
             </div>
           </v-col>

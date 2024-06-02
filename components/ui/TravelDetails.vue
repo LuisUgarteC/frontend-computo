@@ -17,7 +17,7 @@
 
       <v-card-text ref="details">
         <v-divider />
-        <div style="padding-top: 20px">
+        <div style="padding-top: 20px; padding-bottom: 10px;">
           <strong>{{ userEmail }}</strong>
           {{ userNombre }}
         </div>

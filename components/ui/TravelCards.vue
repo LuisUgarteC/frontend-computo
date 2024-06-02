@@ -47,9 +47,8 @@
                 </div>
                 <div>
                   <v-chip class="rounded">
-                    {{ travel.availableSeats }} Lugares disponibles
+                    {{ travel.availableSeats }} Asientos 💺
                   </v-chip>
-                  <span>💺</span>
                 </div>
               </v-card-subtitle>
               <v-card-text>
@@ -140,9 +139,8 @@
                 </div>
                 <div>
                   <v-chip class="rounded">
-                    {{ travel.availableSeats }} Lugares disponibles
+                    {{ travel.availableSeats }} Asientos 💺
                   </v-chip>
-                  <span>💺</span>
                 </div>
               </v-card-subtitle>
               <v-card-text>
