@@ -12,15 +12,26 @@
       </v-icon>
     </v-btn>
     <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" :salida-date="selectedIda" :regreso-date="selectedRegreso" />
+    <payment-success
+      ref="paymentSuccessDialog"
+      :passenger-info="passengerInfo"
+      :salida-date="selectedIda"
+      :regreso-date="selectedRegreso"
+      :user-email="userEmail"
+      :user-nombre="userNombre"
+      @open-details="openDetails"
+    />
   </div>
 </template>
 
 <script>
 import TravelDetails from './TravelDetails.vue'
+import PaymentSuccess from './PaymentSuccess.vue'
 
 export default {
   components: {
-    TravelDetails
+    TravelDetails,
+    PaymentSuccess
   },
   props: {
     selectedSeats: {
@@ -47,6 +58,10 @@ export default {
       type: Array,
       required: true,
       default: () => []
+    },
+    userNombre: {
+      type: String,
+      required: true
     }
   },
   data () {
@@ -81,6 +96,7 @@ export default {
 
         if (response.data.message === 'Trip created successfully') {
           this.$emit('purchase-success', response.data.trip)
+          this.$refs.paymentSuccessDialog.showDialog() // Muestra el diálogo de éxito
         }
       } catch (error) {
         // eslint-disable-next-line no-console

@@ -1,8 +1,5 @@
 <template>
   <v-container class="d-flex flex-column align-center justify-center">
-    <v-btn color="primary" @click="showDialog">
-      Mostrar Diálogo
-    </v-btn>
     <v-dialog v-model="success" max-width="400px">
       <v-card class="relative flex flex-column align-center pa-6 text-center" elevation="3">
         <v-icon size="100" class="border-4 border-yellow-500 yellow--text">
@@ -15,8 +12,8 @@
           Que disfrutes viajando con nosotros
         </v-card-text>
         <v-row class="d-flex justify-center">
-          <v-btn color="yellow darken-1" @click="printReceipt">
-            Imprimir
+          <v-btn color="yellow darken-1" @click="openDetails">
+            Detalles
           </v-btn>
           <v-btn class="ml-4" @click="goHome">
             Volver al inicio
@@ -32,6 +29,28 @@
 import confetti from 'canvas-confetti'
 
 export default {
+  props: {
+    passengerInfo: {
+      type: Array,
+      required: true
+    },
+    salidaDate: {
+      type: Object,
+      required: true
+    },
+    regresoDate: {
+      type: Object,
+      required: true
+    },
+    userEmail: {
+      type: String,
+      required: true
+    },
+    userNombre: {
+      type: String,
+      required: true
+    }
+  },
   data () {
     return {
       success: false
@@ -56,11 +75,11 @@ export default {
         origin: { y: 0.6 }
       })
     },
-    printReceipt () {
-      // Lógica para imprimir el recibo
+    openDetails () {
+      this.$emit('open-details')
     },
     goHome () {
-      // Lógica para volver al inicio
+      this.$router.push('/')
     }
   }
 }

@@ -93,10 +93,10 @@
           :selected-regreso="selectedRegresoDetails"
           :price="calculatedPrice"
           :passenger-info="passengerInfo"
+          :user-nombre="userNombre"
           @purchase-success="handlePurchaseSuccess"
         />
       </v-container>
-      <payment-success />
       <benefits-banner />
       <info-extra />
       <info-footer />
@@ -130,13 +130,12 @@ export default {
       destinos: [
         { text: 'Leon', value: 'Leon' },
         { text: 'Ciudad de Mexico', value: 'Ciudad de Mexico' }
-      ]
+      ],
+      userNombre: 'Juan Perez' // Asegúrate de que esta propiedad esté definida y tenga un valor
     }
   },
   mounted () {
     this.userEmail = this.$store.state.userEmail || ''
-    // eslint-disable-next-line no-console
-    console.log('User Email:', this.userEmail)
   },
   methods: {
     handleUpdatePassengerInfo (updatedPassengerInfo) {
