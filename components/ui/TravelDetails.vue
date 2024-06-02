@@ -3,12 +3,16 @@
     <v-card ref="detailsCard">
       <v-card-title class="red darken-3 white--text d-flex justify-space-between align-center" style="position: sticky; top: 0; z-index: 1;">
         <span>Detalles del viaje</span>
-        <v-btn class="transparent white--text" small text @click="printDetails">
-          Imprimir
-        </v-btn>
-        <v-btn class="transparent white--text" small text @click="dialog = false">
-          Listo
-        </v-btn>
+        <div class="d-flex align-center">
+          <v-btn class="transparent white--text mr-2" small text @click="printDetails">
+            <v-icon>
+              mdi-printer
+            </v-icon>
+          </v-btn>
+          <v-btn class="transparent white--text" small text @click="dialog = false">
+            Listo
+          </v-btn>
+        </div>
       </v-card-title>
 
       <v-card-text ref="details">
@@ -179,7 +183,6 @@ export default {
       const imgWidth = 210
       const imgHeight = canvas.height * imgWidth / canvas.width
 
-      // Añadir un logo o cualquier otro elemento
       const logoUrl = require('@/assets/img/seat-occupied.png') // cambiar
       const logoWidth = 15
       const logoHeight = 15

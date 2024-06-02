@@ -1,16 +1,13 @@
 <template>
-  <div class="d-flex flex-row justify-center" style="padding-top: 20px;">
-    <v-btn class="grey darken-2 white--text mr-2" rounded @click="openDetails">
-      <v-icon>
-        mdi-information-outline
-      </v-icon>
-    </v-btn>
-    <v-btn class="red darken-4 white--text" :loading="loading" @click="finalizePurchase">
-      {{ loading ? 'Procesando...' : 'Comprar por ' + formatCurrency(total) }}
-      <v-icon class="ml-1">
-        mdi-cash-check
-      </v-icon>
-    </v-btn>
+  <v-row justify="center" align="center">
+    <v-col cols="auto">
+      <v-btn class="red darken-4 white--text" :loading="loading" @click="finalizePurchase">
+        {{ loading ? 'Procesando...' : 'Comprar por ' + formatCurrency(total) }}
+        <v-icon class="ml-1">
+          mdi-cash-check
+        </v-icon>
+      </v-btn>
+    </v-col>
     <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" :salida-date="selectedIda" :regreso-date="selectedRegreso" />
     <payment-success
       ref="paymentSuccessDialog"
@@ -21,7 +18,7 @@
       :user-nombre="userNombre"
       @open-details="openDetails"
     />
-  </div>
+  </v-row>
 </template>
 
 <script>
@@ -96,7 +93,7 @@ export default {
 
         if (response.data.message === 'Trip created successfully') {
           this.$emit('purchase-success', response.data.trip)
-          this.$refs.paymentSuccessDialog.showDialog() // Muestra el diálogo de éxito
+          this.$refs.paymentSuccessDialog.showDialog() // Muestra el diaog
         }
       } catch (error) {
         // eslint-disable-next-line no-console
