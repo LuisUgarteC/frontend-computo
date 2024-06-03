@@ -2,7 +2,7 @@
   <v-dialog v-model="dialog" width="300" persistent>
     <v-card class="d-flex justify-center align-center">
       <v-img
-        :src="require('@/assets/img/van.gif')"
+        :src="require('@/assets/img/van2.gif')"
       />
     </v-card>
   </v-dialog>
