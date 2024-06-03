@@ -12,6 +12,7 @@ import CarDetails from '@/components/ui/CarDetails'
 import TravelDetails from '@/components/ui/TravelDetails'
 import EndButtons from '@/components/ui/EndButtons'
 import PaymentSuccess from '@/components/ui/PaymentSuccess'
+import CreditCard from '@/components/ui/CreditCard'
 
 Vue.component('HomeHeader', HomeHeader)
 Vue.component('BenefitsBanner', BenefitsBanner)
@@ -25,3 +26,4 @@ Vue.component('CarDetails', CarDetails)
 Vue.component('TravelDetails', TravelDetails)
 Vue.component('EndButtons', EndButtons)
 Vue.component('PaymentSuccess', PaymentSuccess)
+Vue.component('CreditCard', CreditCard)

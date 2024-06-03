@@ -89,6 +89,7 @@
             <car-details />
           </v-col>
         </v-row>
+        <credit-card />
         <end-buttons
           :selected-seats="selectedSeats"
           :user-email="userEmail || ''"
