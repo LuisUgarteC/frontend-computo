@@ -2,13 +2,13 @@
   <v-row justify="center" align="center">
     <v-col cols="auto">
       <v-btn class="red darken-4 white--text" :loading="loading" @click="finalizePurchase">
-        {{ loading ? 'Procesando...' : 'Comprar por ' + formatCurrency(total) }}
+        {{ loading ? 'Procesando...' : 'Comprar por ' + formatCurrency(price) }}
         <v-icon class="ml-1">
           mdi-cash-check
         </v-icon>
       </v-btn>
     </v-col>
-    <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" :salida-date="selectedIda" :regreso-date="selectedRegreso" />
+    <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" :salida-date="selectedIda" :regreso-date="selectedRegreso" :total="price" />
     <payment-success
       ref="paymentSuccessDialog"
       :passenger-info="passengerInfo"
@@ -16,20 +16,21 @@
       :regreso-date="selectedRegreso"
       :user-email="userEmail"
       :user-nombre="userNombre"
+      :total="price"
       @open-details="openDetails"
     />
   </v-row>
 </template>
 
 <script>
-import TravelDetails from './TravelDetails.vue'
-import PaymentSuccess from './PaymentSuccess.vue'
+// import TravelDetails from './TravelDetails.vue'
+// import PaymentSuccess from './PaymentSuccess.vue'
 
 export default {
-  components: {
-    TravelDetails,
-    PaymentSuccess
-  },
+  // components: {
+  //   TravelDetails,
+  //   PaymentSuccess
+  // },
   props: {
     selectedSeats: {
       type: Array,
@@ -63,14 +64,7 @@ export default {
   },
   data () {
     return {
-      loading: false,
-      total: 0
-    }
-  },
-  watch: {
-    passengerInfo: {
-      handler: 'calculateTotal',
-      deep: true
+      loading: false
     }
   },
   methods: {
@@ -93,7 +87,7 @@ export default {
 
         if (response.data.message === 'Trip created successfully') {
           this.$emit('purchase-success', response.data.trip)
-          this.$refs.paymentSuccessDialog.showDialog() // Muestra el diaog
+          this.$refs.paymentSuccessDialog.showDialog()
         }
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -105,9 +99,6 @@ export default {
     },
     openDetails () {
       this.$refs.travelDetailsDialog.dialog = true
-    },
-    calculateTotal () {
-      this.total = this.passengerInfo.reduce((sum, pasajero) => sum + pasajero.price, 0)
     },
     formatCurrency (amount) {
       return `$${amount.toFixed(2).toLocaleString()}`

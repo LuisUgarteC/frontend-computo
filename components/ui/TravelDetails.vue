@@ -48,7 +48,7 @@
             Total
           </h2>
           <div class="d-flex justify-end red--text text-lg font-semibold total-amount">
-            {{ formatCurrency(total) }}
+            {{ formatCurrency(calculatedTotal) }}
           </div>
         </div>
 
@@ -133,21 +133,23 @@ export default {
     regresoDate: {
       type: Object,
       required: true
+    },
+    total: {
+      type: Number,
+      required: true
     }
   },
   data () {
     return {
       dialog: false,
-      total: 0,
       duracion: '2 Días',
       userEmail: '',
       userNombre: ''
     }
   },
-  watch: {
-    passengerInfo: {
-      handler: 'calculateTotal',
-      deep: true
+  computed: {
+    calculatedTotal () {
+      return this.passengerInfo.reduce((sum, pasajero) => sum + pasajero.price, 0)
     }
   },
   mounted () {
@@ -162,9 +164,6 @@ export default {
     fetchUserNombre () {
       const nombre = localStorage.getItem('userNombre')
       this.userNombre = nombre || 'ERROR 2'
-    },
-    calculateTotal () {
-      this.total = this.passengerInfo.reduce((sum, pasajero) => sum + pasajero.price, 0)
     },
     formatCurrency (amount) {
       return `$${amount.toFixed(2).toLocaleString()}`

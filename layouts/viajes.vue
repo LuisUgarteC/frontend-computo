@@ -77,7 +77,7 @@
         :passenger-info="passengerInfo"
         @continue="showComponentsWithSeats"
       />
-      <v-container v-if="showComponents" id="aqui" class="pa-1">
+      <v-container v-if="showComponents" class="pa-1">
         <v-row>
           <v-col cols="12" md="4">
             <seat-selector :key="selectedIda + selectedRegreso" :selected-ida="selectedIdaDetails" :selected-regreso="selectedRegresoDetails" @seats-selected="updateSelectedSeats" />
@@ -89,17 +89,28 @@
             <car-details />
           </v-col>
         </v-row>
-        <credit-card />
-        <end-buttons
-          :selected-seats="selectedSeats"
-          :user-email="userEmail || ''"
-          :selected-ida="selectedIdaDetails"
-          :selected-regreso="selectedRegresoDetails"
-          :price="calculatedPrice"
-          :passenger-info="passengerInfo"
-          :user-nombre="userNombre"
-          @purchase-success="handlePurchaseSuccess"
-        />
+        <v-row justify="center">
+          <v-btn color="primary" @click="showPaymentComponents = true">
+            Continuar al Pago
+          </v-btn>
+        </v-row>
+        <v-row v-if="showPaymentComponents">
+          <v-col cols="12">
+            <credit-card />
+          </v-col>
+          <v-col cols="12">
+            <end-buttons
+              :selected-seats="selectedSeats"
+              :user-email="userEmail || ''"
+              :selected-ida="selectedIdaDetails"
+              :selected-regreso="selectedRegresoDetails"
+              :price="calculatedPrice"
+              :passenger-info="passengerInfo"
+              :user-nombre="userNombre"
+              @purchase-success="handlePurchaseSuccess"
+            />
+          </v-col>
+        </v-row>
       </v-container>
       <benefits-banner />
       <info-extra />
@@ -115,6 +126,7 @@ export default {
       showLoader: false,
       showBanner: true,
       showComponents: false,
+      showPaymentComponents: false,
       selectedSeats: [],
       calculatedPrice: 0,
       userEmail: '',
@@ -135,29 +147,16 @@ export default {
         { text: 'Leon', value: 'Leon' },
         { text: 'Ciudad de Mexico', value: 'Ciudad de Mexico' }
       ],
-      userNombre: 'Juan Perez' // Asegúrate de que esta propiedad esté definida y tenga un valor
+      userNombre: 'Juan Perez'
     }
   },
   mounted () {
     this.userEmail = this.$store.state.userEmail || ''
   },
   methods: {
-    scrollToSection () {
-      this.$nextTick(() => {
-        const aqui = document.getElementById('aqui')
-        if (aqui) {
-          setTimeout(() => {
-            const headerOffset = 130 // Ajusta este valor según la altura de tu header
-            const elementPosition = aqui.getBoundingClientRect().top
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-
-            window.scrollTo(0, offsetPosition) // Desplazamiento instantáneo
-          }, 0) // Esperar a que el DOM se estabilice
-        }
-      })
-    },
     handleUpdatePassengerInfo (updatedPassengerInfo) {
       this.passengerInfo = updatedPassengerInfo
+      this.calculateTotalPrice()
     },
     async handleSearch () {
       this.showLoader = true
@@ -200,17 +199,15 @@ export default {
       this.$nextTick(() => {
         this.showComponents = true
         this.calculateTotalPrice()
-        this.scrollToSection()
       })
     },
     calculateTotalPrice () {
       let totalPrice = 0
-      const pricePerSeat = 350
-      const priceForMinor = 200
-      this.selectedSeats.forEach((seat) => {
-        totalPrice += seat.passengerType === 'Menor' ? priceForMinor : pricePerSeat
+      this.passengerInfo.forEach((passenger) => {
+        totalPrice += passenger.passengerType === 'Menor' ? 200 : 350
       })
       this.calculatedPrice = totalPrice
+      return totalPrice
     },
     incrementDate (date, days) {
       const result = new Date(date)

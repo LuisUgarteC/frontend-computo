@@ -1,5 +1,5 @@
 <template>
-  <v-container class="si">
+  <v-container>
     <v-container>
       <v-row no-gutters>
         <v-col cols="4" class="d-flex align-center">
@@ -93,7 +93,4 @@ export default {
 .dark .text-zinc-200 {
   color: #e5e7eb;
 }
-/* .si {
-  padding-right: 30px;
-} */
 </style>

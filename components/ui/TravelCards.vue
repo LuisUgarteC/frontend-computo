@@ -193,7 +193,7 @@
           mdi-seat
         </v-icon>
       </v-btn>
-      <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" :salida-date="selectedIdaDetails" :regreso-date="selectedRegresoDetails" />
+      <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" :salida-date="selectedIdaDetails" :regreso-date="selectedRegresoDetails" :total="calculatedTotal" />
     </div>
   </v-container>
 </template>
@@ -243,6 +243,9 @@ export default {
       return this.travels.filter(travel =>
         travel.routeType === `${this.destination}-${this.origin}` && travel.date === this.date && travel.type === 'regreso'
       )
+    },
+    calculatedTotal () {
+      return this.passengerInfo.reduce((sum, pasajero) => sum + pasajero.price, 0)
     }
   },
   watch: {
@@ -271,9 +274,7 @@ export default {
         const selectedIda = this.idaTravels[this.selectedIda].id
         const selectedRegreso = this.regresoTravels[this.selectedRegreso].id
         this.$emit('continue', { selectedIda, selectedRegreso })
-        this.$emit('scroll-to-section')
       }
-      this.$emit('scroll-to-section')
     },
     incrementDate (date, days) {
       const result = new Date(date)
