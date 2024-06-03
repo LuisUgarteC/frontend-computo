@@ -3,15 +3,15 @@
     <v-container>
       <v-row no-gutters>
         <v-col cols="4" class="d-flex align-center">
-          <v-avatar size="16" color="green" class="mr-2" />
+          <v-avatar size="16" color="#FFCB74" class="mr-2" />
           <span class="caption text-zinc-800 dark:text-zinc-200">Seleccionado</span>
         </v-col>
         <v-col cols="4" class="d-flex align-center">
-          <v-avatar size="16" color="grey lighten-2" class="mr-2" />
+          <v-avatar size="16" color="#F6F6F6" class="mr-2" />
           <span class="caption text-zinc-800 dark:text-zinc-200">Disponible</span>
         </v-col>
         <v-col cols="4" class="d-flex align-center">
-          <v-avatar size="16" color="grey darken-4" class="mr-2" />
+          <v-avatar size="16" color="#B38B59" class="mr-2" />
           <span class="caption text-zinc-800 dark:text-zinc-200">Ocupado</span>
         </v-col>
       </v-row>
