@@ -271,7 +271,9 @@ export default {
         const selectedIda = this.idaTravels[this.selectedIda].id
         const selectedRegreso = this.regresoTravels[this.selectedRegreso].id
         this.$emit('continue', { selectedIda, selectedRegreso })
+        this.$emit('scroll-to-section')
       }
+      this.$emit('scroll-to-section')
     },
     incrementDate (date, days) {
       const result = new Date(date)

@@ -77,7 +77,7 @@
         :passenger-info="passengerInfo"
         @continue="showComponentsWithSeats"
       />
-      <v-container v-if="showComponents" class="pa-1">
+      <v-container v-if="showComponents" id="aqui" class="pa-1">
         <v-row>
           <v-col cols="12" md="4">
             <seat-selector :key="selectedIda + selectedRegreso" :selected-ida="selectedIdaDetails" :selected-regreso="selectedRegresoDetails" @seats-selected="updateSelectedSeats" />
@@ -142,6 +142,20 @@ export default {
     this.userEmail = this.$store.state.userEmail || ''
   },
   methods: {
+    scrollToSection () {
+      this.$nextTick(() => {
+        const aqui = document.getElementById('aqui')
+        if (aqui) {
+          setTimeout(() => {
+            const headerOffset = 130 // Ajusta este valor según la altura de tu header
+            const elementPosition = aqui.getBoundingClientRect().top
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+            window.scrollTo(0, offsetPosition) // Desplazamiento instantáneo
+          }, 0) // Esperar a que el DOM se estabilice
+        }
+      })
+    },
     handleUpdatePassengerInfo (updatedPassengerInfo) {
       this.passengerInfo = updatedPassengerInfo
     },
@@ -186,6 +200,7 @@ export default {
       this.$nextTick(() => {
         this.showComponents = true
         this.calculateTotalPrice()
+        this.scrollToSection()
       })
     },
     calculateTotalPrice () {
