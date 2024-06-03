@@ -2,7 +2,7 @@
   <v-container class="d-flex flex-column align-center justify-center">
     <v-dialog v-model="success" max-width="400px">
       <v-card class="relative flex flex-column align-center pa-6 text-center" elevation="3">
-        <v-icon size="100" class="border-4 border-yellow-500 yellow--text">
+        <v-icon size="100" class="icon-color">
           mdi-check-circle-outline
         </v-icon>
         <v-card-title class="text-h5 font-weight-bold mb-2 justify-center">
@@ -12,7 +12,7 @@
           Que disfrutes viajando con nosotros
         </v-card-text>
         <v-row class="d-flex justify-center">
-          <v-btn color="yellow darken-1" @click="openDetails">
+          <v-btn class="btn-color" @click="openDetails">
             Detalles
           </v-btn>
           <v-btn class="ml-4" @click="goHome">
@@ -102,6 +102,14 @@ export default {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1000; /* Ensure it is above the dialog */
+  z-index: 1000;
+}
+.icon-color {
+  color: #FFCB74 !important;
+  border-color: #FFCB74 !important;
+}
+.btn-color {
+  background-color: #FFCB74 !important;
+  color: #111111 !important;
 }
 </style>

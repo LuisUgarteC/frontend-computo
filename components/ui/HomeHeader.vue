@@ -4,7 +4,7 @@
       <v-container class="py-6">
         <v-row align="center" justify="space-between">
           <v-col cols="auto">
-            <v-btn icon href="#" class="mr-2">
+            <v-btn icon href="/" class="mr-2">
               <v-img
                 src="https://placehold.co/100x50"
                 height="40"
@@ -139,7 +139,7 @@ export default {
       localStorage.removeItem('token')
       this.isLoggedIn = false
       this.userName = ''
-      this.$router.push('/')
+      window.location.href = '/'
     }
   }
 }

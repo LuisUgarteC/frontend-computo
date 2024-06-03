@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="auto">
-      <v-btn class="red darken-4 white--text" :loading="loading" @click="finalizePurchase">
+      <v-btn class="light-green darken-2 white--text" :loading="loading" @click="finalizePurchase">
         {{ loading ? 'Procesando...' : 'Comprar por ' + formatCurrency(price) }}
         <v-icon class="ml-1">
           mdi-cash-check
@@ -23,14 +23,7 @@
 </template>
 
 <script>
-// import TravelDetails from './TravelDetails.vue'
-// import PaymentSuccess from './PaymentSuccess.vue'
-
 export default {
-  // components: {
-  //   TravelDetails,
-  //   PaymentSuccess
-  // },
   props: {
     selectedSeats: {
       type: Array,

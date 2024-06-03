@@ -55,7 +55,7 @@
           </v-col>
 
           <v-col cols="12" md="auto" class="d-flex align-center space-x-1">
-            <v-btn color="red darken-1" dark class="d-flex align-center space-x-1" @click="handleSearch">
+            <v-btn color="#FFCB74" dark class="black--text d-flex align-center space-x-1" @click="handleSearch">
               <v-icon left>
                 mdi-magnify
               </v-icon>
@@ -90,8 +90,8 @@
           </v-col>
         </v-row>
         <v-row justify="center">
-          <v-btn color="primary" @click="showPaymentComponents = true">
-            Continuar al Pago
+          <v-btn style="background-color: #B38B59" class="white--text" @click="showPaymentComponents = true">
+            Proceder al Pago 💳
           </v-btn>
         </v-row>
         <v-row v-if="showPaymentComponents">

@@ -102,7 +102,7 @@ export default {
           this.$store.commit('setToken', result.token)
           localStorage.setItem('userEmail', this.email)
           localStorage.setItem('userNombre', result.userNombre)
-          this.$router.push('/viajes')
+          this.$router.push('/')
           // this.$router.push('/prueba') // prueba de traer los usuarios
         }
       }).catch((err) => {

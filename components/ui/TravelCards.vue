@@ -187,10 +187,10 @@
       </v-col>
     </v-row>
     <div class="d-flex flex-row justify-center">
-      <v-btn class="yellow darken-4 white--text" @click="continueToSeats">
-        Continuar
+      <v-btn style="background-color: #B38B59" class="white--text" @click="continueToSeats">
+        Escoger Asiento(s)
         <v-icon class="ml-1">
-          mdi-seat
+          mdi-page-next-outline
         </v-icon>
       </v-btn>
       <travel-details ref="travelDetailsDialog" :passenger-info="passengerInfo" :salida-date="selectedIdaDetails" :regreso-date="selectedRegresoDetails" :total="calculatedTotal" />

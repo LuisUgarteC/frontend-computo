@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" max-width="600">
     <v-card ref="detailsCard">
-      <v-card-title class="red darken-3 white--text d-flex justify-space-between align-center" style="position: sticky; top: 0; z-index: 1;">
+      <v-card-title class="white--text d-flex justify-space-between align-center" style="background-color: #B38B59; position: sticky; top: 0; z-index: 1;">
         <span>Detalles del viaje</span>
         <div class="d-flex align-center">
           <v-btn class="transparent white--text mr-2" small text @click="printDetails">
@@ -47,7 +47,7 @@
           <h2 class="text-lg font-semibold">
             Total
           </h2>
-          <div class="d-flex justify-end red--text text-lg font-semibold total-amount">
+          <div class="d-flex justify-end text-lg font-semibold total-amount">
             {{ formatCurrency(calculatedTotal) }}
           </div>
         </div>
@@ -205,5 +205,6 @@ export default {
 .total-amount {
   font-size: 1.5em;
   font-weight: bold;
+   color: #B38B59;
 }
 </style>

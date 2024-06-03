@@ -143,7 +143,7 @@ export default {
   gap: 0.5rem;
 }
 .seating-area {
-  background-color: #ffffff;
+  background-color: #fefefe;
 }
 .shadow-area {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
