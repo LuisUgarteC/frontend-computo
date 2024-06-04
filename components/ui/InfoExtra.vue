@@ -5,6 +5,7 @@
         <v-icon
           size="64"
           style="margin-top: 20px;"
+          color="#2f2f2f"
         >
           {{ item.icon }}
         </v-icon>
@@ -27,13 +28,13 @@ export default {
         {
           icon: 'mdi-car-info',
           title: 'Quiénes Somos',
-          description: 'Descubre más de nuestra visión, lo que nos mueve y como queremos cambiar la forma en que tú viajas por el país',
+          description: 'Descubre más de nuestra visión, lo que nos mueve y como queremos cambiar la forma en que tú viajas.',
           link: '#'
         },
         {
           icon: 'mdi-sprout',
           title: 'Medio Ambiente',
-          description: 'Por cada CONNEXIÓN se evita, al menos, el viaje de 5 autos privados, ahorrando así emisiones equivalentes a más de 500 mil kilómetros anuales.',
+          description: 'Por cada viaje se evita, al menos, el viaje de 5 autos privados, ahorrando así emisiones equivalentes a más de 500 mil kilómetros anuales.',
           link: undefined
         },
         {

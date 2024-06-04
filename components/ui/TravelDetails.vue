@@ -182,15 +182,15 @@ export default {
       const imgWidth = 210
       const imgHeight = canvas.height * imgWidth / canvas.width
 
-      const logoUrl = require('@/assets/img/seat-occupied.png') // cambiar
-      const logoWidth = 15
+      const logoUrl = require('@/assets/img/image.png') // cambiar
+      const logoWidth = 30
       const logoHeight = 15
 
       // Añadir logo al PDF
       doc.addImage(logoUrl, 'PNG', 35, 10, logoWidth, logoHeight)
 
       doc.setFontSize(12)
-      doc.text('Gracias por tu compra', 100, 30) // cambiar
+      doc.text('Gracias por tu compra. ¡Disfruta tu viaje!', 90, 30) // cambiar
 
       // Añadir la imagen del contenido del componente
       doc.addImage(imgData, 'PNG', 35, 35, imgWidth / 1.5, imgHeight / 1.5)

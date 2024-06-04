@@ -1,50 +1,51 @@
 <template>
   <div>
-    <v-app-bar app color="white">
+    <v-app-bar app color="#2f2f2f">
       <v-container class="py-6">
         <v-row align="center" justify="space-between">
           <v-col cols="auto">
             <v-btn icon href="/" class="mr-2">
               <v-img
-                src="https://placehold.co/100x50"
+                :src="require('@/assets/img/logo-bg.png')"
                 height="40"
+                width="100"
               />
             </v-btn>
           </v-col>
           <v-col class="d-none d-lg-flex">
             <v-row>
-              <v-btn text href="/" color="black" class="ml-10">
+              <v-btn text href="/" color="white" class="ml-10">
                 Inicio
               </v-btn>
-              <v-btn text color="black" @click="navigateToEvents">
+              <v-btn text color="white" @click="navigateToEvents">
                 <v-icon left>
                   mdi-calendar-month
                 </v-icon>
                 Eventos y Sitios
               </v-btn>
-              <v-btn text color="black" @click="navigateToBenefits">
+              <v-btn text color="white" @click="navigateToBenefits">
                 Beneficios
               </v-btn>
-              <v-btn text href="#" color="black">
+              <v-btn text href="#" color="white">
                 Nosotros
               </v-btn>
-              <v-btn v-if="isLoggedIn" text color="black" @click="navigateToViajes">
+              <v-btn v-if="isLoggedIn" text color="#FFCB74" @click="navigateToViajes">
                 Viajes
               </v-btn>
             </v-row>
           </v-col>
           <v-col v-if="!isLoggedIn" cols="auto" class="d-none d-lg-flex">
-            <v-btn rounded @click="navigateToLogin">
+            <v-btn text dark rounded @click="navigateToLogin">
               Iniciar Sesión
             </v-btn>
-            <v-btn color="green" dark rounded @click="navigateToRegister">
-              Regístrate gratis
+            <v-btn text dark rounded @click="navigateToRegister">
+              Registrarse
             </v-btn>
           </v-col>
           <v-col v-else cols="auto" class="d-none d-lg-flex">
             <v-row align="center">
               <span class="mr-4">Bienvenido, <strong>{{ userName }}</strong></span>
-              <v-btn text color="black" @click="logout">
+              <v-btn text color="white" @click="logout">
                 Salir
                 <v-icon style="padding-left: 5px;">
                   mdi-logout
@@ -91,7 +92,7 @@
           <v-list-item-title>Iniciar Sesión</v-list-item-title>
         </v-list-item>
         <v-list-item v-if="!isLoggedIn" link @click="navigateToRegister">
-          <v-list-item-title>Regístrate gratis</v-list-item-title>
+          <v-list-item-title>Regístro</v-list-item-title>
         </v-list-item>
         <v-list-item v-else link @click="logout">
           <v-list-item-title>Logout</v-list-item-title>
@@ -146,4 +147,7 @@ export default {
 </script>
 
 <style scoped>
+.mr-4 {
+  color: white;
+}
 </style>

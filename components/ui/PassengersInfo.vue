@@ -11,7 +11,7 @@
           <span class="caption text-zinc-800 dark:text-zinc-200">Disponible</span>
         </v-col>
         <v-col cols="4" class="d-flex align-center">
-          <v-avatar size="16" color="#B38B59" class="mr-2" />
+          <v-avatar size="16" color="#868684" class="mr-2" />
           <span class="caption text-zinc-800 dark:text-zinc-200">Ocupado</span>
         </v-col>
       </v-row>
@@ -23,7 +23,7 @@
             <v-card-title class="font-bold text-lg d-flex align-items-center">
               PASAJERO #{{ index + 1 }} →
               <v-img
-                :src="require('@/assets/img/seat-full.png')"
+                :src="require('@/assets/img/prueba11.png')"
                 alt="seat-img"
                 max-width="30"
                 max-height="30"

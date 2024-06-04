@@ -13,14 +13,14 @@
         >
           <v-img
             v-if="seat.type === 'passenger' && seat.occupied"
-            :src="require('@/assets/img/seat-occupied.png')"
+            :src="require('@/assets/img/prueba6.png')"
             alt="seat-occupied-img"
             max-width="40"
             max-height="40"
           />
           <v-img
             v-else-if="seat.type === 'passenger'"
-            :src="seat.selected ? require('@/assets/img/seat-full.png') : require('@/assets/img/seat-empty.png')"
+            :src="seat.selected ? require('@/assets/img/prueba11.png') : require('@/assets/img/seat-empty.png')"
             alt="seat-img"
             max-width="40"
             max-height="40"
@@ -33,7 +33,7 @@
             max-height="40"
           />
           <div v-else-if="seat.type === 'driver'" class="position-relative">
-            <v-img :src="require('@/assets/img/driver.png')" alt="driver-img" max-width="40" max-height="40" />
+            <v-img :src="require('@/assets/img/prueba8.png')" alt="driver-img" max-width="40" max-height="40" />
             <!-- <span class="overlay-text">Chofer</span> -->
           </div>
           <span class="seat-label">{{ seat.label }}</span>
@@ -143,7 +143,7 @@ export default {
   gap: 0.5rem;
 }
 .seating-area {
-  background-color: #fefefe;
+  background-color: #ffffff;
 }
 .shadow-area {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
