@@ -65,7 +65,7 @@
         </v-row>
       </v-container>
       <div v-if="showBanner">
-        <v-img src="https://placehold.co/1200x400" />
+        <v-img :src="require('@/assets/img/pasos.jpg')" />
       </div>
       <loading-dialog v-model="showLoader" @close="onLoadingDialogClose" />
       <travel-cards

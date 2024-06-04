@@ -1,7 +1,7 @@
 <template>
   <v-container style="padding-top: 25px;">
     <v-card class="mx-auto" max-width="400" style="position: relative;">
-      <v-img height="200" src="https://placehold.co/400x200" />
+      <v-img height="180" :src="require('@/assets/img/vanpremiumbg.png')" />
 
       <v-card class="pa-2" color="grey lighten-2" outlined style="position: absolute; top: 10px; right: 10px; transform: translate(0, 0);" @click="dialog = true">
         <div class="text-caption grey--text">

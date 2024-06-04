@@ -1,7 +1,7 @@
 <template>
   <v-container style="padding-top: 25px;">
     <v-row class="flex-column align-center">
-      <v-img src="https://placehold.co/200x75" alt="bus-top-view" class="ma-3 pa-2" />
+      <v-img :src="require('@/assets/img/front2.png')" width="240" alt="bus-top-view" class="ma-3 pa-2" />
       <v-row class="grid-cols-4 gap-2 pa-4 rounded-lg seating-area shadow-area justify-center" style="width: 300px;">
         <v-col
           v-for="seat in seats"
@@ -39,7 +39,7 @@
           <span class="seat-label">{{ seat.label }}</span>
         </v-col>
       </v-row>
-      <v-img src="https://placehold.co/200x75" alt="bus-bottom-view" class="ma-3 pa-2" />
+      <v-img :src="require('@/assets/img/back.png')" width="220" alt="bus-bottom-view" class="ma-3 pa-2" />
     </v-row>
   </v-container>
 </template>
