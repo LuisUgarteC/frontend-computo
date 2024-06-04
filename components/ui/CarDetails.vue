@@ -1,10 +1,11 @@
 <template>
   <v-container style="padding-top: 25px;">
     <v-card class="mx-auto" max-width="400" style="position: relative;">
-      <v-img height="200" src="https://placehold.co/400x200" alt="Van Image" />
+      <v-img height="200" src="https://placehold.co/400x200" />
 
-      <v-card class="pa-2" color="grey lighten-2" outlined style="position: absolute; top: 10px; right: 10px; transform: translate(0, 0);">
+      <v-card class="pa-2" color="grey lighten-2" outlined style="position: absolute; top: 10px; right: 10px; transform: translate(0, 0);" @click="dialog = true">
         <div class="text-caption grey--text">
+          <div>Asientos</div>
           <v-icon>mdi-grid</v-icon>
           17
         </div>
@@ -62,8 +63,24 @@
         </v-row>
       </v-card-text>
     </v-card>
+
+    <v-dialog v-model="dialog" max-width="800px">
+      <v-card>
+        <v-img :src="require('@/assets/img/distribucion.jpg')" />
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      dialog: false
+    }
+  }
+}
+</script>
 
 <style scoped>
 .list-item::before {

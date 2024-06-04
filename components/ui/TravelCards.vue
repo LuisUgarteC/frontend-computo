@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="custom-color">
     <v-row>
       <!-- Ruta de ida -->
       <v-col>
@@ -291,8 +291,11 @@ export default {
 </script>
 
 <style scoped>
+.custom-color {
+  background-color: #eceff1;
+}
 .selected-card {
-  background-color: #d3d3d3;
+  background-color: #ffe1ae;
 }
 .available-seats {
   font-size: 16px;

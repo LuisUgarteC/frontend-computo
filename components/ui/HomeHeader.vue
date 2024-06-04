@@ -44,7 +44,7 @@
           </v-col>
           <v-col v-else cols="auto" class="d-none d-lg-flex">
             <v-row align="center">
-              <span class="mr-4">Bienvenido, <strong>{{ userName }}</strong></span>
+              <span class="mr-4">Bienvenido, <strong class="user-name">{{ userName }}</strong></span>
               <v-btn text color="white" @click="logout">
                 Salir
                 <v-icon style="padding-left: 5px;">
@@ -149,5 +149,8 @@ export default {
 <style scoped>
 .mr-4 {
   color: white;
+}
+.user-name {
+  color: #FFCB74;
 }
 </style>

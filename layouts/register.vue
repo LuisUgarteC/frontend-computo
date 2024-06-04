@@ -89,7 +89,8 @@
               <v-row>
                 <v-col cols="12">
                   <v-btn
-                    color="green"
+                    color="#b38b59"
+                    dark
                     block
                     large
                     rounded
@@ -120,7 +121,6 @@ export default {
       telefono: null,
       cumple: null,
       benefits: [
-        'Cancelaciones con un solo click *(Sujeto a términos y condiciones).',
         'Viajes gratis.',
         'Tarifas especiales y promociones.',
         'Seguro de viajero extendido.',

@@ -51,7 +51,8 @@
                 ¿Olvidaste la contraseña?
               </v-btn> -->
               <v-btn
-                color="green"
+                color="#b38b59"
+                dark
                 block
                 large
                 rounded
@@ -77,7 +78,6 @@ export default {
       email: null,
       password: null,
       benefits: [
-        'Cancelaciones con un solo click *(Sujeto a términos y condiciones).',
         'Viajes gratis.',
         'Tarifas especiales y promociones.',
         'Seguro de viajero extendido.',
