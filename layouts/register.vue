@@ -23,78 +23,86 @@
               </li>
             </ul>
           </v-col>
-          <v-col cols="12" md="6">
-            <v-form>
-              <v-row class="mb-4" dense>
-                <v-col cols="12" md="6">
+          <v-col md="6">
+            <v-form ref="registerForm" v-model="valid" @submit.prevent="register">
+              <v-row dense>
+                <v-col>
                   <v-text-field
                     v-model="nombre"
+                    :rules="requiredRules"
                     label="NOMBRE *"
                     required
                   />
                 </v-col>
-                <v-col cols="12" md="6">
+                <v-col>
                   <v-text-field
                     v-model="apellido"
+                    :rules="requiredRules"
                     label="APELLIDO *"
                     required
                   />
                 </v-col>
               </v-row>
-              <v-row class="mb-4">
-                <v-col cols="12">
+              <v-row>
+                <v-col>
                   <v-text-field
                     v-model="email"
+                    :rules="[...requiredRules, emailRule]"
                     label="CORREO ELECTRÓNICO *"
                     type="email"
                     required
                   />
                 </v-col>
               </v-row>
-              <v-row class="mb-4">
-                <v-col cols="12">
+              <v-row>
+                <v-col>
                   <v-text-field
                     v-model="password"
+                    :rules="requiredRules"
                     label="CONTRASEÑA *"
                     type="password"
                     required
                   />
                 </v-col>
               </v-row>
-              <v-row class="mb-4" dense>
-                <v-col cols="12" md="6">
+              <v-row dense>
+                <v-col>
                   <v-text-field
                     v-model="telefono"
+                    :rules="[...requiredRules, numericRule]"
                     label="TELEFONO *"
                     type="tel"
                     required
                   />
                 </v-col>
-                <v-col cols="12" md="6">
+                <v-col>
                   <v-text-field
                     v-model="cumple"
+                    :rules="requiredRules"
                     label="CUMPLEAÑOS *"
                     type="date"
+                    required
                   />
                 </v-col>
               </v-row>
-              <v-row class="mb-4">
-                <v-col cols="12">
+              <v-row>
+                <v-col>
                   <v-checkbox
+                    v-model="acceptTerms"
+                    :rules="[v => !!v || 'Debes aceptar los términos y condiciones']"
                     label="Al registrar tu cuenta con nosotros aceptas nuestro TÉRMINOS Y CONDICIONES, AVISO DE PRIVACIDAD. Solo mandamos correos de notificación de compra o seguimiento de tu reservación."
                     required
                   />
                 </v-col>
               </v-row>
               <v-row>
-                <v-col cols="12">
+                <v-col>
                   <v-btn
                     color="#b38b59"
                     dark
                     block
                     large
                     rounded
-                    class="mt-4"
                     @click="register"
                   >
                     REGISTRAR TU CUENTA
@@ -114,44 +122,57 @@
 export default {
   data () {
     return {
-      email: null,
-      password: null,
-      nombre: null,
-      apellido: null,
-      telefono: null,
-      cumple: null,
+      email: '',
+      password: '',
+      nombre: '',
+      apellido: '',
+      telefono: '',
+      cumple: '',
+      acceptTerms: false,
+      valid: false,
       benefits: [
         'Viajes gratis.',
         'Tarifas especiales y promociones.',
         'Seguro de viajero extendido.',
         'Modificaciones a tu itinerario.'
-      ]
+      ],
+      requiredRules: [
+        v => !!v || 'Este campo es obligatorio'
+      ],
+      emailRule: v => /.+@.+\..+/.test(v) || 'El correo debe ser válido',
+      numericRule: v => /^[0-9]*$/.test(v) || 'El teléfono solo puede contener números'
     }
   },
   methods: {
     register () {
-      const url = '/register'
-      const data = {
-        email: this.email,
-        password: this.password,
-        nombre: this.nombre,
-        apellido: this.apellido,
-        telefono: this.telefono,
-        cumple: this.cumple
+      if (this.$refs.registerForm.validate()) {
+        const url = '/register'
+        const data = {
+          email: this.email,
+          password: this.password,
+          nombre: this.nombre,
+          apellido: this.apellido,
+          telefono: this.telefono,
+          cumple: this.cumple
+        }
+        this.$axios.post(url, data)
+          .then((res) => {
+            if (res.data.message === 'User registered successfully') {
+              this.$router.push('/login')
+            }
+          })
+          .catch((error) => {
+            // eslint-disable-next-line no-console
+            console.log('@@ error => ', error)
+          })
       }
-      this.$axios.post(url, data)
-        .then((res) => {
-          // eslint-disable-next-line no-console
-          console.log('@@ res => ', res)
-          if (res.data.message === 'User registered successfully') {
-            this.$router.push('/login')
-          }
-        })
-        .catch((error) => {
-          // eslint-disable-next-line no-console
-          console.log('@@ error => ', error)
-        })
     }
   }
 }
 </script>
+
+<style scoped>
+.text-center {
+  text-align: center;
+}
+</style>

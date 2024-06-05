@@ -70,7 +70,7 @@
       <loading-dialog v-model="showLoader" @close="onLoadingDialogClose" />
       <div v-if="!showLoader && !travels.length && searchPerformed" class="text-center my-6">
         <v-icon>mdi-calendar-remove</v-icon>
-        <h2>No contamos con horarios disponibles para esta fecha</h2>
+        <h2>No contamos con horarios disponibles</h2>
         <p>Te invitamos a buscar otra fecha o ruta</p>
       </div>
       <travel-cards

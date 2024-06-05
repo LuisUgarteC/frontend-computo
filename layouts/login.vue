@@ -10,28 +10,15 @@
               :src="require('@/assets/img/video.gif')"
               class="pa-10"
             />
-            <!-- <h2 class="text-h4 font-weight-bold mb-4">
-              BENEFICIOS PARA MIEMBROS
-            </h2>
-            <h3 class="text-h4 mb-4">
-              Crear una cuenta
-            </h3>
-            <ul
-              class="mb-4"
-              style="list-style-type: none;"
-            >
-              <li v-for="(benefit, index) in benefits" :key="index" class="my-2">
-                <v-icon left color="green">
-                  mdi mdi-check-circle
-                </v-icon>
-                {{ benefit }}
-              </li>
-            </ul> -->
           </v-col>
           <v-col cols="12" md="6">
-            <v-form>
+            <v-form ref="loginForm" v-model="valid" @submit.prevent="login">
+              <h2 class="text-center mb-4">
+                Iniciar Sesión
+              </h2>
               <v-text-field
                 v-model="email"
+                :rules="emailRules"
                 label="CORREO ELECTRÓNICO"
                 type="email"
                 placeholder="Ingresa tu correo"
@@ -42,6 +29,7 @@
               />
               <v-text-field
                 v-model="password"
+                :rules="passwordRules"
                 label="CONTRASEÑA"
                 type="password"
                 placeholder="Ingresa tu contraseña"
@@ -50,7 +38,10 @@
                 class="mb-4"
                 prepend-icon="mdi-lock"
               />
-              <v-checkbox label="RECORDAR CUENTA" class="mb-4" />
+              <v-alert v-if="errorMessage" type="error" class="mb-4">
+                {{ errorMessage }}
+              </v-alert>
+              <!-- <v-checkbox label="RECORDAR CUENTA" class="mb-4" /> -->
               <v-btn text small color="blue">
                 ¿Olvidaste la contraseña?
               </v-btn>
@@ -69,7 +60,6 @@
           </v-col>
         </v-row>
       </v-container>
-      <!-- <info-extra /> -->
       <info-footer />
     </v-main>
   </v-app>
@@ -79,44 +69,48 @@
 export default {
   data () {
     return {
-      email: null,
-      password: null
-      // benefits: [
-      //   'Viajes gratis.',
-      //   'Tarifas especiales y promociones.',
-      //   'Seguro de viajero extendido.',
-      //   'Modificaciones a tu itinerario.'
-      // ]
+      email: '',
+      password: '',
+      valid: false,
+      errorMessage: '',
+      emailRules: [
+        v => !!v || 'El correo es obligatorio',
+        v => /.+@.+\..+/.test(v) || 'El correo debe ser válido'
+      ],
+      passwordRules: [
+        v => !!v || 'La contraseña es obligatoria'
+      ]
     }
   },
   methods: {
     async login () {
-      // eslint-disable-next-line no-console
-      await console.log('@@@ datos => ', this.email, this.password)
-      const sendData = {
-        email: this.email,
-        password: this.password
-      }
-      await this.$auth.loginWith('local', {
-        data: sendData
-      }).then(async (res) => {
-        // eslint-disable-next-line no-console
-        const result = await res.data
-        if (result.message === 'success') {
-          this.$store.commit('setToken', result.token)
-          localStorage.setItem('userEmail', this.email)
-          localStorage.setItem('userNombre', result.userNombre)
-          this.$router.push('/')
-          // this.$router.push('/prueba') // prueba de traer los usuarios
+      if (this.$refs.loginForm.validate()) {
+        const sendData = {
+          email: this.email,
+          password: this.password
         }
-      }).catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log('@@@ error => ', err)
-      })
+        try {
+          const res = await this.$auth.loginWith('local', {
+            data: sendData
+          })
+          const result = res.data
+          if (result.message === 'success') {
+            this.$store.commit('setToken', result.token)
+            localStorage.setItem('userEmail', this.email)
+            localStorage.setItem('userNombre', result.userNombre)
+            this.$router.push('/')
+          }
+        } catch (err) {
+          this.errorMessage = 'Error en el inicio de sesión. Por favor, verifica tus credenciales.'
+        }
+      }
     }
   }
 }
 </script>
 
 <style scoped>
+.text-center {
+  text-align: center;
+}
 </style>
