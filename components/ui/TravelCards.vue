@@ -249,6 +249,12 @@ export default {
     }
   },
   watch: {
+    selectedIda () {
+      this.$emit('reset')
+    },
+    selectedRegreso () {
+      this.$emit('reset')
+    },
     travels (newTravels) {
       if (newTravels.length) {
         this.formattedDate = this.formatDate(this.date)

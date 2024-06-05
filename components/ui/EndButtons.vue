@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="auto">
-      <v-btn class="light-green darken-2 white--text" :loading="loading" @click="finalizePurchase">
+      <v-btn class="white--text btn-color" :loading="loading" @click="finalizePurchase">
         {{ loading ? 'Procesando...' : 'Comprar por ' + formatCurrency(price) }}
         <v-icon class="ml-1">
           mdi-cash-check
@@ -99,3 +99,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.btn-color {
+  background-color: #b38b59 !important;
+}
+</style>

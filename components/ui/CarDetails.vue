@@ -11,7 +11,13 @@
         </div>
       </v-card>
 
-      <v-card-title>Lineamientos de Equipaje:</v-card-title>
+      <v-card-title>
+        2017 Mercedes-Benz Sprinter
+      </v-card-title>
+
+      <v-card-title>
+        Lineamientos de Equipaje:
+      </v-card-title>
       <v-card-text>
         <div>
           <strong>Dimensiones</strong>
@@ -83,9 +89,9 @@ export default {
 </script>
 
 <style scoped>
-.list-item::before {
+/* .list-item::before {
   content: "•";
   margin-right: 8px;
   color: #000;
-}
+} */
 </style>

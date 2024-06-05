@@ -68,6 +68,11 @@
         <v-img :src="require('@/assets/img/pasos.jpg')" />
       </div>
       <loading-dialog v-model="showLoader" @close="onLoadingDialogClose" />
+      <div v-if="!showLoader && !travels.length && searchPerformed" class="text-center my-6">
+        <v-icon>mdi-calendar-remove</v-icon>
+        <h2>No contamos con horarios disponibles para esta fecha</h2>
+        <p>Te invitamos a buscar otra fecha o ruta</p>
+      </div>
       <travel-cards
         v-if="!showBanner && travels.length"
         :travels="travels"
@@ -76,6 +81,7 @@
         :date="selectedDate"
         :passenger-info="passengerInfo"
         @continue="showComponentsWithSeats"
+        @reset="resetSelectedComponents"
       />
       <v-container v-if="showComponents" class="pa-1">
         <v-row>
@@ -139,6 +145,7 @@ export default {
       selectedRegresoDetails: {},
       travels: [],
       passengerInfo: [],
+      searchPerformed: false,
       origenes: [
         { text: 'Leon', value: 'Leon' },
         { text: 'Ciudad de Mexico', value: 'Ciudad de Mexico' }
@@ -148,6 +155,20 @@ export default {
         { text: 'Ciudad de Mexico', value: 'Ciudad de Mexico' }
       ],
       userNombre: 'Juan Perez'
+    }
+  },
+  watch: {
+    selectedOrigin () {
+      this.resetComponents()
+      this.showBanner = true
+    },
+    selectedDestination () {
+      this.resetComponents()
+      this.showBanner = true
+    },
+    selectedDate () {
+      this.resetComponents()
+      this.showBanner = true
     }
   },
   mounted () {
@@ -160,6 +181,8 @@ export default {
     },
     async handleSearch () {
       this.showLoader = true
+      this.searchPerformed = true
+      this.showBanner = false
       try {
         const response = await this.$axios.get('/get-travels', {
           params: {
@@ -172,14 +195,24 @@ export default {
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error fetching travels:', error)
+        this.travels = []
       } finally {
         this.showLoader = false
-        this.showBanner = false
       }
+    },
+    resetComponents () {
+      this.showComponents = false
+      this.showPaymentComponents = false
+      this.selectedIda = null
+      this.selectedRegreso = null
+      this.selectedIdaDetails = {}
+      this.selectedRegresoDetails = {}
+      this.selectedSeats = []
+      this.calculatedPrice = 0
+      this.searchPerformed = false
     },
     onLoadingDialogClose () {
       this.showLoader = false
-      this.showBanner = false
     },
     updateSelectedSeats (seats) {
       this.selectedSeats = seats
@@ -200,6 +233,12 @@ export default {
         this.showComponents = true
         this.calculateTotalPrice()
       })
+    },
+    resetSelectedComponents () {
+      this.showComponents = false
+      this.showPaymentComponents = false
+      this.selectedSeats = []
+      this.calculatedPrice = 0
     },
     calculateTotalPrice () {
       let totalPrice = 0
