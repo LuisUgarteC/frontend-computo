@@ -6,7 +6,11 @@
       <v-container style="padding-top: 50px">
         <v-row class="pa-10" justify="space-between">
           <v-col cols="12" md="6">
-            <h2 class="text-h4 font-weight-bold mb-4">
+            <v-img
+              :src="require('@/assets/img/video.gif')"
+              class="pa-10"
+            />
+            <!-- <h2 class="text-h4 font-weight-bold mb-4">
               BENEFICIOS PARA MIEMBROS
             </h2>
             <h3 class="text-h4 mb-4">
@@ -22,7 +26,7 @@
                 </v-icon>
                 {{ benefit }}
               </li>
-            </ul>
+            </ul> -->
           </v-col>
           <v-col cols="12" md="6">
             <v-form>
@@ -46,10 +50,10 @@
                 class="mb-4"
                 prepend-icon="mdi-lock"
               />
-              <!-- <v-checkbox id="remember" label="RECORDAR CUENTA" class="mb-4" />
+              <v-checkbox label="RECORDAR CUENTA" class="mb-4" />
               <v-btn text small color="blue">
                 ¿Olvidaste la contraseña?
-              </v-btn> -->
+              </v-btn>
               <v-btn
                 color="#b38b59"
                 dark
@@ -65,7 +69,7 @@
           </v-col>
         </v-row>
       </v-container>
-      <info-extra />
+      <!-- <info-extra /> -->
       <info-footer />
     </v-main>
   </v-app>
@@ -76,13 +80,13 @@ export default {
   data () {
     return {
       email: null,
-      password: null,
-      benefits: [
-        'Viajes gratis.',
-        'Tarifas especiales y promociones.',
-        'Seguro de viajero extendido.',
-        'Modificaciones a tu itinerario.'
-      ]
+      password: null
+      // benefits: [
+      //   'Viajes gratis.',
+      //   'Tarifas especiales y promociones.',
+      //   'Seguro de viajero extendido.',
+      //   'Modificaciones a tu itinerario.'
+      // ]
     }
   },
   methods: {

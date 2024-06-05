@@ -18,17 +18,17 @@
                 Inicio
               </v-btn>
               <v-btn text color="white" @click="navigateToEvents">
-                <v-icon left>
+                <!-- <v-icon left>
                   mdi-calendar-month
-                </v-icon>
+                </v-icon> -->
                 Eventos y Sitios
               </v-btn>
               <v-btn text color="white" @click="navigateToBenefits">
-                Beneficios
-              </v-btn>
-              <v-btn text href="#" color="white">
                 Nosotros
               </v-btn>
+              <!-- <v-btn text href="#" color="white">
+                Nosotros
+              </v-btn> -->
               <v-btn v-if="isLoggedIn" text color="#FFCB74" @click="navigateToViajes">
                 Viajes
               </v-btn>

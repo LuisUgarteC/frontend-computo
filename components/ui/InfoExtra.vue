@@ -34,7 +34,7 @@ export default {
         {
           icon: 'mdi-sprout',
           title: 'Medio Ambiente',
-          description: 'Por cada viaje se evita, al menos, el viaje de 5 autos privados, ahorrando así emisiones equivalentes a más de 500 mil kilómetros anuales.',
+          description: 'Por cada viaje se evita, al menos, el traslado de 5 autos privados, ahorrando así emisiones equivalentes a más de 500 mil kilómetros anuales.',
           link: undefined
         },
         {

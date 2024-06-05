@@ -30,11 +30,12 @@
             Ayuda
           </h5>
           <ul class="text-sm space-y-1" style="list-style-type: none; padding: 0; color: white;">
-            <li><a href="#" class="footer-link">Nosotros</a></li>
+            <li><a class="footer-link" @click="navigateToHome">Inicio</a></li>
+            <!-- <li><a href="#" class="footer-link">Nosotros</a></li> -->
             <li><a class="footer-link" @click="navigateToEvents">Eventos</a></li>
             <!-- <li><a class="footer-link" @click="navigateToLogin">Inicio Sesión</a></li> -->
             <!-- <li><a class="footer-link" @click="navigateToRegister">Regístrate gratis</a></li> -->
-            <li><a class="footer-link" @click="navigateToBenefits">Beneficios</a></li>
+            <li><a class="footer-link" @click="navigateToBenefits">Nosotros</a></li>
           </ul>
         </v-col>
 

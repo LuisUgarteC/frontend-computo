@@ -16,7 +16,7 @@
               style="list-style-type: none;"
             >
               <li v-for="(benefit, index) in benefits" :key="index" class="my-2">
-                <v-icon left color="green">
+                <v-icon left color="#B38B59">
                   mdi mdi-check-circle
                 </v-icon>
                 {{ benefit }}
