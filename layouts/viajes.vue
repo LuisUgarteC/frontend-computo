@@ -89,14 +89,14 @@
             <seat-selector :key="selectedIda + selectedRegreso" :selected-ida="selectedIdaDetails" :selected-regreso="selectedRegresoDetails" @seats-selected="updateSelectedSeats" />
           </v-col>
           <v-col cols="12" md="4">
-            <passengers-info :selected-seats="selectedSeats" @update-passenger-info="handleUpdatePassengerInfo" />
+            <passengers-info :selected-seats="selectedSeats" :show-validation-error="showValidationError" @update-passenger-info="handleUpdatePassengerInfo" />
           </v-col>
           <v-col cols="12" md="4">
             <car-details />
           </v-col>
         </v-row>
         <v-row justify="center">
-          <v-btn style="background-color: #B38B59" class="white--text" @click="showPaymentComponents = true">
+          <v-btn style="background-color: #B38B59" class="white--text" @click="validateBeforePayment">
             Proceder al Pago 💳
           </v-btn>
         </v-row>
@@ -133,6 +133,7 @@ export default {
       showBanner: true,
       showComponents: false,
       showPaymentComponents: false,
+      showValidationError: false,
       selectedSeats: [],
       calculatedPrice: 0,
       userEmail: '',
@@ -256,6 +257,14 @@ export default {
     handlePurchaseSuccess (trip) {
       // eslint-disable-next-line no-console
       console.log('Purchase successful:', trip)
+    },
+    validateBeforePayment () {
+      if (this.selectedSeats.length === 0 || this.selectedSeats.some(seat => !seat.passengerName || !seat.passengerType)) {
+        this.showValidationError = true
+      } else {
+        this.showValidationError = false
+        this.showPaymentComponents = true
+      }
     }
   }
 }

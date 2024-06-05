@@ -61,6 +61,9 @@
         </v-col>
       </v-row>
     </v-col>
+    <v-alert v-if="showValidationError" type="error" class="mt-4">
+      Todos los campos son obligatorios. Seleccione un asiento y complete la información del pasajero.
+    </v-alert>
   </v-container>
 </template>
 
@@ -70,6 +73,10 @@ export default {
     selectedSeats: {
       type: Array,
       required: true
+    },
+    showValidationError: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
